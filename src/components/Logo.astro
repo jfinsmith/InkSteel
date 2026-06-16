@@ -1,0 +1,79 @@
+---
+// The Ink & Steel lockup: a fountain-pen-nib mark (pen = blade) + serif wordmark.
+interface Props {
+  variant?: 'full' | 'mark' | 'stacked';
+  class?: string;
+}
+const { variant = 'full', class: className = '' } = Astro.props;
+---
+
+<span class:list={['logo', `logo--${variant}`, className]} aria-label="The Ink & Steel">
+  <svg class="logo__mark" viewBox="0 0 100 150" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="logo-steel" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#2a2c33"></stop>
+        <stop offset="0.5" stop-color="#14130f"></stop>
+        <stop offset="1" stop-color="#3a3f49"></stop>
+      </linearGradient>
+    </defs>
+    <path
+      fill="url(#logo-steel)"
+      d="M50 8 C72 8 88 22 88 42 L55 124 C53 130 47 130 45 124 L12 42 C12 22 28 8 50 8 Z"
+    ></path>
+    <circle cx="50" cy="48" r="8.5" fill="var(--paper)"></circle>
+    <path d="M50 56 L50 120" stroke="var(--paper)" stroke-width="3" stroke-linecap="round"></path>
+    <path
+      fill="var(--oxblood)"
+      d="M50 130 c6 8 9 12 9 17 a9 9 0 0 1-18 0 c0-5 3-9 9-17 Z"
+    ></path>
+  </svg>
+  {
+    variant !== 'mark' && (
+      <span class="logo__word">
+        Ink <span class="logo__amp">&amp;</span> Steel
+      </span>
+    )
+  }
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1;
+  }
+  .logo__mark {
+    width: auto;
+    height: 1.5em;
+    flex: none;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .logo:hover .logo__mark {
+    transform: rotate(-6deg);
+  }
+  .logo__word {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5em;
+    letter-spacing: -0.01em;
+    font-variation-settings: 'opsz' 144, 'WONK' 1;
+    white-space: nowrap;
+  }
+  .logo__amp {
+    color: var(--oxblood);
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'WONK' 1, 'SOFT' 60;
+    padding: 0 0.02em;
+  }
+  .logo--stacked {
+    flex-direction: column;
+    gap: 0.35em;
+    text-align: center;
+  }
+  .logo--stacked .logo__mark {
+    height: 2.6em;
+  }
+</style>

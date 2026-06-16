@@ -1,0 +1,28 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# local env (Firebase web config lives here for local dev)
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+
+# logs
+npm-debug.log*
+*.log
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log

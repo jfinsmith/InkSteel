@@ -1,0 +1,52 @@
+rules_version = '2';
+
+// Security model: the site is fully static and writes to Firestore directly from
+// the browser. The Firebase web API key is PUBLIC — these rules are the real lock.
+// Strangers may CREATE signups/messages and bump view counts, but can never READ,
+// LIST, edit, or delete anything. You read submissions in the Firebase console.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isEmail(s) {
+      return s is string && s.size() <= 200
+        && s.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+    }
+
+    // --- Newsletter signups -------------------------------------------------
+    match /subscribers/{id} {
+      allow create: if isEmail(request.resource.data.email)
+        && request.resource.data.keys().hasOnly(['email', 'source', 'createdAt']);
+      allow read, list, update, delete: if false;
+    }
+
+    // --- Contact messages ---------------------------------------------------
+    match /messages/{id} {
+      allow create: if request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 120
+        && isEmail(request.resource.data.email)
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 5000
+        && request.resource.data.keys().hasOnly(['name', 'email', 'message', 'createdAt']);
+      allow read, list, update, delete: if false;
+    }
+
+    // --- Public per-post view counters -------------------------------------
+    match /views/{slug} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['count', 'slug'])
+        && request.resource.data.count == 1
+        && request.resource.data.slug == slug;
+      allow update: if request.resource.data.keys().hasOnly(['count', 'slug'])
+        && request.resource.data.count == resource.data.count + 1
+        && request.resource.data.slug == slug;
+      allow delete: if false;
+    }
+
+    // --- Deny everything else ----------------------------------------------
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

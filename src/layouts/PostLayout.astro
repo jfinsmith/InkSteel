@@ -1,0 +1,138 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import HeroPlate from '../components/InkArt/HeroPlate.astro';
+import Divider from '../components/InkArt/Divider.astro';
+import Newsletter from '../components/Newsletter.astro';
+import ViewCounter from '../components/ViewCounter.astro';
+import { slugify } from '../lib/utils';
+
+interface Props {
+  title: string;
+  seoTitle?: string;
+  description: string;
+  excerpt: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  author: string;
+  tags: string[];
+  categories: string[];
+  heroImage?: string;
+  heroImageAlt?: string;
+  canonicalURL?: string;
+  slug: string;
+  readingTime: number;
+}
+const {
+  title, seoTitle, description, excerpt, pubDate, updatedDate, author,
+  tags, categories, heroImage, heroImageAlt, canonicalURL, slug, readingTime,
+} = Astro.props;
+
+const fmt = (d: Date) =>
+  new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(d);
+const primaryCategory = categories[0];
+const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage);
+---
+
+<BaseLayout
+  title={seoTitle ?? `${title} · The Ink & Steel`}
+  description={description}
+  image={isRasterHero ? heroImage : undefined}
+  type="article"
+  publishedTime={pubDate}
+  modifiedTime={updatedDate}
+  author={author}
+  tags={tags}
+  section={primaryCategory}
+  canonicalURL={canonicalURL}
+>
+  <article class="post">
+    <header class="post__header wrap">
+      {primaryCategory && (
+        <a href={`/categories/${slugify(primaryCategory)}`} class="kicker post__kicker">
+          {primaryCategory}
+        </a>
+      )}
+      <h1 class="post__title">{title}</h1>
+      <p class="post__deck">{excerpt}</p>
+      <div class="post__byline">
+        <span>By <strong>{author}</strong></span>
+        <span class="post__dot" aria-hidden="true">·</span>
+        <time datetime={pubDate.toISOString()}>{fmt(pubDate)}</time>
+        <span class="post__dot" aria-hidden="true">·</span>
+        <span>{readingTime} min read</span>
+        <span class="post__dot" aria-hidden="true">·</span>
+        <ViewCounter slug={slug} />
+      </div>
+      {updatedDate && (
+        <p class="post__updated">Updated {fmt(updatedDate)}</p>
+      )}
+    </header>
+
+    <figure class="post__hero wrap">
+      {isRasterHero ? (
+        <img src={heroImage} alt={heroImageAlt ?? title} width="1200" height="675" loading="eager" />
+      ) : (
+        <HeroPlate title={title} kicker={primaryCategory ?? 'Dispatch'} seed={slug} />
+      )}
+    </figure>
+
+    <div class="post__body prose dropcap">
+      <slot />
+    </div>
+
+    <Divider />
+
+    <footer class="post__footer wrap">
+      {tags.length > 0 && (
+        <div class="post__tags">
+          {tags.map((t) => (
+            <a class="chip" href={`/tags/${slugify(t)}`}>#{t}</a>
+          ))}
+        </div>
+      )}
+      <p class="post__back"><a href="/blog">← Back to all dispatches</a></p>
+    </footer>
+
+    <section class="post__cta wrap">
+      <Newsletter />
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .post__header { max-width: 48rem; margin-inline: auto; text-align: center; padding-top: 3rem; }
+  .post__kicker { text-decoration: none; display: inline-block; margin-bottom: 1rem; }
+  .post__title { font-size: var(--step-4); margin-bottom: 0.8rem; }
+  .post__deck {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-1);
+    color: var(--ink-soft);
+    max-width: 36rem;
+    margin: 0 auto 1.4rem;
+  }
+  .post__byline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+  }
+  .post__byline strong { color: var(--ink); }
+  .post__dot { color: var(--paper-edge); }
+  .post__updated { margin-top: 0.5rem; font-size: var(--step--1); color: var(--ink-faint); font-style: italic; }
+
+  .post__hero { max-width: var(--wide); margin: 2.5rem auto 0; }
+  .post__hero img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); object-fit: cover; }
+
+  .post__body { margin-top: 3rem; }
+  .post__body :global(h2), .post__body :global(h3) { max-width: var(--measure); margin-inline: auto; }
+
+  .post__footer { max-width: var(--measure); margin-inline: auto; }
+  .post__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .post__back a { font-family: var(--font-display); }
+
+  .post__cta { max-width: 48rem; margin: 3.5rem auto 0; }
+</style>

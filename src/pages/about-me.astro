@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Splatter from '../components/InkArt/Splatter.astro';
+import Divider from '../components/InkArt/Divider.astro';
+---
+
+<BaseLayout
+  title="About — The Ink & Steel"
+  description="A fifteen-year Florida law-enforcement veteran turned weary observer of the human condition. Not a Democrat or a Republican — just a cop's-eye view of the political landscape, with a dose of common sense and a dash of unflinching honesty."
+>
+  <header class="about-hero">
+    <div class="about-hero__splatter" aria-hidden="true"><Splatter color="var(--oxblood)" /></div>
+    <div class="wrap about-hero__inner">
+      <p class="kicker">About the Author</p>
+      <h1>The world is a dumpster fire,<br />and I am pretending to be a firefighter.</h1>
+    </div>
+  </header>
+
+  <article class="wrap about-body">
+    <div class="prose dropcap">
+      <h2>Who am I…</h2>
+
+      <p>The hum of the patrol car's engine vibrated beneath me, a constant, low thrum against the backdrop of the Florida night. Streetlights cast long, distorted shadows, painting the asphalt in hues of amber and sickly yellow. Another shift, another night in the trenches, another chapter in the ongoing saga of humanity's capacity for both brilliance and utter, baffling stupidity.</p>
+
+      <p>I wasn't born into this life. My roots lay in the hallowed halls of academia, in the quiet contemplation of chemical equations and the elegant structure of the periodic table. My childhood was a tapestry woven with Sunday sermons and the scent of well-worn Bibles, a world where faith was as tangible as the humid air. But beneath the veneer of piety, a restless curiosity simmered, a yearning to understand the world beyond the stained-glass windows.</p>
+
+      <p>The path to law enforcement was a detour, a sharp turn on a road I never expected to travel. It began with a ride-along, a glimpse into the raw, unfiltered reality of the streets. Three of my former students, faces I recognized from the classroom, their youthful innocence already tarnished by the harsh realities of life, were being led away in handcuffs. That night, the comfortable illusions of my world shattered, and I found myself drawn to the chaos, to the sharp edges of a world where right and wrong were often blurred and indistinct.</p>
+
+      <p>Fifteen years. Fifteen years of witnessing the human drama unfold, of navigating the labyrinth of bureaucracy, of trying to maintain a semblance of sanity in a world that seemed determined to lose its collective mind. I've seen the best and the worst of humanity, the heroes and the villains, the victims and the perpetrators. I've seen the way power corrupts, how fear breeds hatred, and how easily people can be manipulated by empty promises and demagogic rhetoric.</p>
+
+      <p>And through it all, I've held onto a stubborn belief in common sense, in the simple decency of treating others with respect, in the radical notion that we should all just mind our own damn business. I've watched as political discourse devolved into a circus of insults and sound bites, as nuance was sacrificed on the altar of tribalism, and as the cult of personality replaced critical thinking.</p>
+
+      <p>This website, this digital confessional, became my refuge, my sanctuary in a world gone mad. It's a place to vent, to rant, to dissect the absurdities and expose the hypocrisies without fear of reprisal. It's a place to call bullshit on the bullshitters, to shine a light on the charlatans and the snake-oil salesmen who prey on the vulnerable and the gullible.</p>
+
+      <blockquote>I don't fit neatly into any political box. I'm not a Democrat or a Republican, a conservative or a liberal. I'm just a Floridian cop, a weary observer of the human condition, who believes in the power of reason and the importance of critical thinking.</blockquote>
+
+      <p>I'm a pragmatist, a realist, a cynic with a sliver of hope still flickering in the darkness.</p>
+
+      <p>Maybe this website will become something more than a digital rant. Maybe it will become a platform for sanity, a beacon of reason in a world drowning in misinformation and propaganda. Maybe it will become a community of like-minded souls, a place where we can share our frustrations and our hopes, where we can laugh at the absurdity of it all and find solace in our shared exasperation.</p>
+
+      <p>And maybe, just maybe, someone will hear our voices. Maybe a podcast, a YouTube show, or some other platform will open up, where I can share my unique perspective, where I can offer a cop's-eye view of the political landscape, where I can set the record straight on law enforcement, on politics, on anything that demands a dose of common sense and a dash of unflinching honesty.</p>
+
+      <p>Until then, I'll keep writing, keep ranting, keep shining a light on the absurdities, because if we don't laugh, we'll cry. And frankly, I'm all out of tears. The Florida sun will rise again tomorrow, and the madness will continue, but I'll be here, watching, waiting, and documenting the slow-motion train wreck of our society, one snarky post at a time.</p>
+    </div>
+
+    <Divider />
+
+    <p class="about-cta">
+      <a href="/blog" class="btn">Read the dispatches</a>
+      <a href="/the-record" class="btn btn--ghost">See The Record</a>
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-hero { position: relative; overflow: hidden; padding-block: clamp(3rem, 8vw, 5.5rem) 1rem; }
+  .about-hero__splatter { position: absolute; top: -3rem; right: -4rem; width: 26rem; height: 26rem; opacity: 0.08; z-index: 0; pointer-events: none; }
+  .about-hero__inner { position: relative; z-index: 1; max-width: 50rem; }
+  .about-hero h1 { font-size: var(--step-4); margin-top: 0.6rem; }
+  .about-body { max-width: 44rem; margin-inline: auto; padding-block: 2rem; }
+  .about-body .prose { margin-inline: 0; }
+  .about-cta { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+</style>

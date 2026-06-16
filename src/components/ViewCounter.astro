@@ -1,0 +1,44 @@
+---
+// Per-post view counter backed by Firestore `views/{slug}`. Renders nothing if
+// Firebase isn't configured. Counts at most once per browser session per post.
+interface Props { slug: string; }
+const { slug } = Astro.props;
+---
+<span class="views" data-views data-slug={slug} hidden>
+  <span data-count>—</span> views
+</span>
+
+<style>
+  .views { color: var(--ink-faint); }
+  .views[hidden] { display: none; }
+</style>
+
+<script>
+  import { getDb, isFirebaseConfigured } from '../lib/firebase';
+
+  const el = document.querySelector<HTMLElement>('[data-views]');
+  if (el && isFirebaseConfigured) {
+    const slug = el.dataset.slug!;
+    const countEl = el.querySelector<HTMLElement>('[data-count]')!;
+    (async () => {
+      try {
+        const db = getDb()!;
+        const { doc, getDoc, setDoc, increment } = await import('firebase/firestore');
+        const ref = doc(db, 'views', slug);
+        const key = `viewed:${slug}`;
+        const isNew = !sessionStorage.getItem(key);
+        if (isNew) {
+          await setDoc(ref, { count: increment(1), slug }, { merge: true });
+          sessionStorage.setItem(key, '1');
+        }
+        const snap = await getDoc(ref);
+        const n = (snap.data()?.count as number) ?? 0;
+        countEl.textContent = new Intl.NumberFormat('en-US').format(n);
+        el.hidden = false;
+      } catch (err) {
+        // Counter is non-essential; stay hidden on any error (e.g. rules deny).
+        console.debug('view counter unavailable', err);
+      }
+    })();
+  }
+</script>

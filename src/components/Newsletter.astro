@@ -1,0 +1,104 @@
+---
+// Newsletter signup → writes to the Firestore `subscribers` collection.
+// Works without Firebase configured (shows a friendly message instead).
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+---
+
+<form class:list={['newsletter', { 'newsletter--compact': compact }]} data-newsletter novalidate>
+  <div class="newsletter__intro">
+    <p class="kicker">The Dispatch</p>
+    <h3 class="newsletter__title">Common sense, delivered.</h3>
+    <p class="newsletter__sub">
+      New essays in your inbox. No spam, no nonsense — just ink &amp; steel.
+    </p>
+  </div>
+  <div class="newsletter__row">
+    <label class="visually-hidden">
+      Email address
+      <input type="email" name="email" required placeholder="you@example.com" autocomplete="email" />
+    </label>
+    <!-- honeypot: real humans leave this empty -->
+    <input type="text" name="company" tabindex="-1" autocomplete="off" class="newsletter__hp" aria-hidden="true" />
+    <button class="btn" type="submit">Subscribe</button>
+  </div>
+  <p class="newsletter__status" data-status role="status" aria-live="polite"></p>
+</form>
+
+<style>
+  .newsletter {
+    border: 1px solid var(--paper-edge);
+    border-radius: var(--radius);
+    background: var(--paper);
+    padding: clamp(1.4rem, 4vw, 2.2rem);
+    box-shadow: var(--shadow);
+  }
+  .newsletter__title { font-size: var(--step-2); margin-top: 0.3rem; }
+  .newsletter__sub { color: var(--ink-soft); margin-top: 0.4rem; max-width: 34rem; }
+  .newsletter__row { display: flex; gap: 0.6rem; margin-top: 1.2rem; flex-wrap: wrap; }
+  .newsletter__row label { flex: 1 1 16rem; }
+  .newsletter input[type='email'] {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    padding: 0.7em 0.9em;
+    background: var(--paper-deep);
+    border: 1px solid var(--paper-edge);
+    border-radius: var(--radius);
+    color: var(--ink);
+  }
+  .newsletter input[type='email']:focus-visible { border-color: var(--oxblood); outline-offset: 0; }
+  .newsletter__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .newsletter__status { margin-top: 0.8rem; font-size: var(--step--1); min-height: 1.2em; }
+  .newsletter__status.is-ok { color: var(--steel); }
+  .newsletter__status.is-err { color: var(--oxblood); }
+  .newsletter--compact { box-shadow: none; padding: 0; border: 0; background: none; }
+  .newsletter--compact .newsletter__sub { font-size: var(--step--1); }
+</style>
+
+<script>
+  import { getDb, isFirebaseConfigured } from '../lib/firebase';
+
+  document.querySelectorAll<HTMLFormElement>('[data-newsletter]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const email = String(data.get('email') || '').trim();
+      const honey = String(data.get('company') || '');
+      status.className = 'newsletter__status';
+
+      if (honey) return; // bot
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        status.textContent = 'Please enter a valid email address.';
+        status.classList.add('is-err');
+        return;
+      }
+      if (!isFirebaseConfigured) {
+        status.textContent = 'Signups open soon — thanks for your patience!';
+        status.classList.add('is-ok');
+        return;
+      }
+      const btn = form.querySelector('button')!;
+      btn.disabled = true;
+      try {
+        const db = getDb()!;
+        const { collection, addDoc, serverTimestamp } = await import('firebase/firestore');
+        await addDoc(collection(db, 'subscribers'), {
+          email,
+          source: location.pathname,
+          createdAt: serverTimestamp(),
+        });
+        form.reset();
+        status.textContent = 'You’re on the list. Welcome to the resistance of reason.';
+        status.classList.add('is-ok');
+      } catch (err) {
+        console.error(err);
+        status.textContent = 'Something went wrong. Please try again in a moment.';
+        status.classList.add('is-err');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  });
+</script>

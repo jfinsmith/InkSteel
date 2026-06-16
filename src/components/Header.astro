@@ -1,0 +1,125 @@
+---
+import Logo from './Logo.astro';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'The Blog' },
+  { href: '/the-record', label: 'The Record' },
+  { href: '/about-me', label: 'About' },
+  { href: '/faqs', label: 'FAQ' },
+];
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+---
+
+<header class="masthead">
+  <div class="masthead__bar wrap">
+    <p class="masthead__tagline">From the Desk of Sanity</p>
+    <p class="masthead__date">Decoding the Politics of the United States</p>
+  </div>
+  <div class="masthead__main wrap">
+    <a href="/" class="masthead__logo" aria-label="The Ink &amp; Steel — home">
+      <Logo />
+    </a>
+    <button class="masthead__toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="primary-nav" class="masthead__nav" aria-label="Primary">
+      {
+        links.map((l) => (
+          <a href={l.href} class:list={['masthead__link', { 'is-active': isActive(l.href) }]} aria-current={isActive(l.href) ? 'page' : undefined}>
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<style>
+  .masthead {
+    border-bottom: 2px solid var(--ink);
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: saturate(1.1) blur(2px);
+  }
+  .masthead__bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 0.45rem;
+    border-bottom: 1px solid var(--paper-edge);
+    font-family: var(--font-display);
+    font-size: var(--step--1);
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .masthead__tagline { color: var(--oxblood); font-weight: 600; }
+  .masthead__main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 0.9rem;
+    gap: 1rem;
+  }
+  .masthead__logo { font-size: clamp(1rem, 0.85rem + 0.7vw, 1.25rem); text-decoration: none; }
+  .masthead__nav { display: flex; gap: clamp(0.8rem, 2vw, 1.8rem); align-items: center; }
+  .masthead__link {
+    font-family: var(--font-display);
+    font-size: var(--step-0);
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .masthead__link:hover { color: var(--oxblood); }
+  .masthead__link.is-active { border-bottom-color: var(--oxblood); color: var(--oxblood); }
+
+  .masthead__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 0;
+    padding: 0.4rem;
+    cursor: pointer;
+  }
+  .masthead__toggle span {
+    width: 26px; height: 2px; background: var(--ink); display: block;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  @media (max-width: 720px) {
+    .masthead__bar { flex-direction: column; gap: 0.1rem; text-align: center; }
+    .masthead__toggle { display: flex; }
+    .masthead__nav {
+      position: absolute;
+      left: 0; right: 0;
+      top: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      background: var(--paper);
+      border-bottom: 2px solid var(--ink);
+      padding: 0.5rem clamp(1.1rem, 4vw, 2.5rem) 1rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+    .masthead { position: relative; }
+    .masthead__nav.is-open { max-height: 60vh; }
+    .masthead__link { width: 100%; padding: 0.7rem 0; border-bottom: 1px solid var(--paper-edge); font-size: var(--step-1); }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.masthead__toggle');
+  const nav = document.querySelector<HTMLElement>('#primary-nav');
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(!!open));
+  });
+</script>

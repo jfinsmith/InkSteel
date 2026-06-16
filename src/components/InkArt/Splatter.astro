@@ -1,0 +1,32 @@
+---
+// Decorative ink splatter — an absolutely-positioned accent. Purely ornamental.
+interface Props {
+  color?: string;   // any CSS color / var
+  class?: string;
+}
+const { color = 'var(--ink)', class: className = '' } = Astro.props;
+---
+<svg
+  class:list={['ink-splatter', className]}
+  viewBox="0 0 200 200"
+  aria-hidden="true"
+  style={`--splatter-color:${color}`}
+>
+  <g fill="var(--splatter-color)">
+    <path d="M96 40 C120 38 134 58 128 82 C122 104 138 118 120 134 C104 148 78 142 66 122 C54 102 60 86 70 72 C78 60 80 42 96 40 Z" opacity="0.9"></path>
+    <circle cx="150" cy="64" r="7" opacity="0.8"></circle>
+    <circle cx="44" cy="150" r="5" opacity="0.7"></circle>
+    <circle cx="160" cy="120" r="3.4" opacity="0.6"></circle>
+    <circle cx="38" cy="86" r="3" opacity="0.55"></circle>
+    <circle cx="120" cy="170" r="4.2" opacity="0.6"></circle>
+    <path d="M168 150 c6 1 9 6 6 10 c-3 3-9 2-11-2 c-1-4 1-8 5-8 Z" opacity="0.55"></path>
+  </g>
+</svg>
+<style>
+  .ink-splatter {
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { slugify } from '../../lib/utils';
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const map = new Map<string, { label: string; posts: CollectionEntry<'blog'>[] }>();
+  for (const post of posts) {
+    for (const category of post.data.categories) {
+      const slug = slugify(category);
+      if (!map.has(slug)) map.set(slug, { label: category, posts: [] });
+      map.get(slug)!.posts.push(post);
+    }
+  }
+  return [...map.entries()].map(([slug, { label, posts }]) => ({
+    params: { category: slug },
+    props: {
+      label,
+      posts: posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { label, posts } = Astro.props;
+---
+
+<BaseLayout
+  title={`${label} — The Ink & Steel`}
+  description={`Ink & Steel dispatches filed under “${label}.”`}
+  noindex
+>
+  <header class="wrap page-head">
+    <p class="kicker">Category</p>
+    <h1>{label}</h1>
+    <p class="page-head__sub">{posts.length} {posts.length === 1 ? 'dispatch' : 'dispatches'}.</p>
+  </header>
+  <section class="wrap blog-grid">
+    {posts.map((post) => <PostCard post={post} />)}
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head { max-width: 48rem; margin-inline: auto; text-align: center; padding-block: 3rem 1rem; }
+  .page-head h1 { font-size: var(--step-4); margin: 0.6rem 0 0.4rem; }
+  .page-head__sub { color: var(--ink-faint); }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: clamp(1.8rem, 4vw, 3rem);
+    padding-block: 2.5rem 1rem;
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Splatter from '../components/InkArt/Splatter.astro';
+---
+
+<BaseLayout
+  title="Page not found — The Ink & Steel"
+  description="This page has slipped into the void. Return to the desk of sanity."
+  noindex
+>
+  <section class="notfound wrap">
+    <div class="notfound__splatter" aria-hidden="true"><Splatter color="var(--oxblood)" /></div>
+    <p class="kicker">Error 404</p>
+    <h1>This page spilled its ink.</h1>
+    <p class="notfound__sub">
+      The dispatch you're after has been moved, retired, or never existed — much like
+      certain campaign promises.
+    </p>
+    <div class="notfound__actions">
+      <a href="/" class="btn">Back to home</a>
+      <a href="/blog" class="btn btn--ghost">Read the blog</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound { position: relative; text-align: center; max-width: 40rem; margin-inline: auto; padding-block: clamp(4rem, 12vw, 8rem); }
+  .notfound__splatter { position: absolute; inset: 0; opacity: 0.06; z-index: 0; pointer-events: none; }
+  .notfound h1 { font-size: var(--step-4); margin: 0.6rem 0 1rem; position: relative; }
+  .notfound__sub { font-family: var(--font-display); font-style: italic; color: var(--ink-soft); font-size: var(--step-1); position: relative; }
+  .notfound__actions { display: flex; gap: 0.8rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; position: relative; }
+</style>

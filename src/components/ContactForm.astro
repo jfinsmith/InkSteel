@@ -1,0 +1,91 @@
+---
+// Contact form → writes to the Firestore `messages` collection.
+---
+<form class="contact" data-contact novalidate>
+  <div class="contact__row">
+    <label>
+      <span>Name</span>
+      <input type="text" name="name" required autocomplete="name" maxlength="120" />
+    </label>
+    <label>
+      <span>Email</span>
+      <input type="email" name="email" required autocomplete="email" maxlength="200" />
+    </label>
+  </div>
+  <label class="contact__full">
+    <span>Message</span>
+    <textarea name="message" rows="6" required maxlength="5000"></textarea>
+  </label>
+  <input type="text" name="company" tabindex="-1" autocomplete="off" class="contact__hp" aria-hidden="true" />
+  <div class="contact__actions">
+    <button class="btn" type="submit">Send message</button>
+    <p class="contact__status" data-status role="status" aria-live="polite"></p>
+  </div>
+</form>
+
+<style>
+  .contact { display: flex; flex-direction: column; gap: 1rem; max-width: 40rem; }
+  .contact__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .contact label { display: flex; flex-direction: column; gap: 0.35rem; }
+  .contact label > span { font-family: var(--font-display); font-size: var(--step--1); letter-spacing: 0.04em; color: var(--ink-soft); }
+  .contact input, .contact textarea {
+    font-family: var(--font-body); font-size: var(--step-0); color: var(--ink);
+    padding: 0.65em 0.85em; background: var(--paper-deep);
+    border: 1px solid var(--paper-edge); border-radius: var(--radius); width: 100%;
+    resize: vertical;
+  }
+  .contact input:focus-visible, .contact textarea:focus-visible { border-color: var(--oxblood); outline-offset: 0; }
+  .contact__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .contact__actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .contact__status { font-size: var(--step--1); }
+  .contact__status.is-ok { color: var(--steel); }
+  .contact__status.is-err { color: var(--oxblood); }
+  @media (max-width: 560px) { .contact__row { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  import { getDb, isFirebaseConfigured } from '../lib/firebase';
+
+  const form = document.querySelector<HTMLFormElement>('[data-contact]');
+  const status = form?.querySelector<HTMLElement>('[data-status]');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status) return;
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const message = String(data.get('message') || '').trim();
+    status.className = 'contact__status';
+
+    if (String(data.get('company') || '')) return; // honeypot
+    if (!name || !message || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      status.textContent = 'Please fill in every field with a valid email.';
+      status.classList.add('is-err');
+      return;
+    }
+    if (!isFirebaseConfigured) {
+      status.textContent = 'The mailbox is still being wired up — try again soon.';
+      status.classList.add('is-ok');
+      return;
+    }
+    const btn = form.querySelector('button')!;
+    btn.disabled = true;
+    try {
+      const db = getDb()!;
+      const { collection, addDoc, serverTimestamp } = await import('firebase/firestore');
+      await addDoc(collection(db, 'messages'), {
+        name, email, message,
+        createdAt: serverTimestamp(),
+      });
+      form.reset();
+      status.textContent = 'Message sent. Thank you — I read every one.';
+      status.classList.add('is-ok');
+    } catch (err) {
+      console.error(err);
+      status.textContent = 'Could not send right now. Please try again shortly.';
+      status.classList.add('is-err');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>

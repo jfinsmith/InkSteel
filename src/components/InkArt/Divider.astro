@@ -1,0 +1,22 @@
+---
+// A hand-inked brush-stroke rule with a small nib diamond at center.
+interface Props { class?: string; }
+const { class: className = '' } = Astro.props;
+---
+<div class:list={['ink-divider', className]} role="presentation">
+  <svg viewBox="0 0 600 24" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <path
+      d="M8 13 C 80 9, 150 15, 230 12 C 270 10.5, 280 12, 286 12"
+      fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" opacity="0.85"
+    ></path>
+    <path
+      d="M314 12 C 320 12, 330 10.5, 370 12 C 450 15, 520 9, 592 13"
+      fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" opacity="0.85"
+    ></path>
+    <path d="M300 4 L308 12 L300 20 L292 12 Z" fill="var(--oxblood)"></path>
+  </svg>
+</div>
+<style>
+  .ink-divider { width: 100%; max-width: 30rem; margin: 2.6rem auto; }
+  .ink-divider svg { width: 100%; height: auto; }
+</style>

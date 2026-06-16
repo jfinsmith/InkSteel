@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const count = posts.length;
+---
+
+<BaseLayout
+  title="The Blog — Dispatches from The Ink & Steel"
+  description="Every dispatch: sharp, sourced commentary on the second Trump term — policy, rhetoric, and the absurd, documented day by day."
+>
+  <header class="wrap page-head">
+    <p class="kicker">The Blog</p>
+    <h1>Dispatches from the desk of sanity</h1>
+    <p class="page-head__sub">
+      {count} {count === 1 ? 'essay' : 'essays'} and counting — each one sourced, cited,
+      and written with the conviction that facts still matter.
+    </p>
+  </header>
+
+  <section class="wrap blog-grid">
+    {posts.map((post) => <PostCard post={post} />)}
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head { max-width: 48rem; margin-inline: auto; text-align: center; padding-block: 3rem 1rem; }
+  .page-head h1 { font-size: var(--step-4); margin: 0.6rem 0 0.8rem; }
+  .page-head__sub { font-family: var(--font-display); font-style: italic; color: var(--ink-soft); font-size: var(--step-1); max-width: 36rem; margin-inline: auto; }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: clamp(1.8rem, 4vw, 3rem);
+    padding-block: 2.5rem 1rem;
+  }
+</style>
