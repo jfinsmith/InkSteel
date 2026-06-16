@@ -1,7 +1,9 @@
 ---
 import Logo from './Logo.astro';
+import { withBase } from '../lib/utils';
 
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const norm = (p: string) => p.replace(/\/$/, '') || '/';
+const path = norm(Astro.url.pathname);
 const links = [
   { href: '/', label: 'Home' },
   { href: '/blog', label: 'The Blog' },
@@ -9,8 +11,12 @@ const links = [
   { href: '/about-me', label: 'About' },
   { href: '/faqs', label: 'FAQ' },
 ];
-const isActive = (href: string) =>
-  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+const isActive = (href: string) => {
+  const target = norm(withBase(href));
+  return href === '/'
+    ? path === norm(withBase('/'))
+    : path === target || path.startsWith(target + '/');
+};
 ---
 
 <header class="masthead">
@@ -19,7 +25,7 @@ const isActive = (href: string) =>
     <p class="masthead__date">Decoding the Politics of the United States</p>
   </div>
   <div class="masthead__main wrap">
-    <a href="/" class="masthead__logo" aria-label="The Ink &amp; Steel — home">
+    <a href={withBase('/')} class="masthead__logo" aria-label="The Ink &amp; Steel — home">
       <Logo />
     </a>
     <button class="masthead__toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu">
@@ -28,7 +34,7 @@ const isActive = (href: string) =>
     <nav id="primary-nav" class="masthead__nav" aria-label="Primary">
       {
         links.map((l) => (
-          <a href={l.href} class:list={['masthead__link', { 'is-active': isActive(l.href) }]} aria-current={isActive(l.href) ? 'page' : undefined}>
+          <a href={withBase(l.href)} class:list={['masthead__link', { 'is-active': isActive(l.href) }]} aria-current={isActive(l.href) ? 'page' : undefined}>
             {l.label}
           </a>
         ))

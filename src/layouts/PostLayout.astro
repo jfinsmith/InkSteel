@@ -4,7 +4,7 @@ import HeroPlate from '../components/InkArt/HeroPlate.astro';
 import Divider from '../components/InkArt/Divider.astro';
 import Newsletter from '../components/Newsletter.astro';
 import ViewCounter from '../components/ViewCounter.astro';
-import { slugify } from '../lib/utils';
+import { slugify, withBase } from '../lib/utils';
 
 interface Props {
   title: string;
@@ -48,7 +48,7 @@ const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage
   <article class="post">
     <header class="post__header wrap">
       {primaryCategory && (
-        <a href={`/categories/${slugify(primaryCategory)}`} class="kicker post__kicker">
+        <a href={withBase(`/categories/${slugify(primaryCategory)}`)} class="kicker post__kicker">
           {primaryCategory}
         </a>
       )}
@@ -86,11 +86,11 @@ const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage
       {tags.length > 0 && (
         <div class="post__tags">
           {tags.map((t) => (
-            <a class="chip" href={`/tags/${slugify(t)}`}>#{t}</a>
+            <a class="chip" href={withBase(`/tags/${slugify(t)}`)}>#{t}</a>
           ))}
         </div>
       )}
-      <p class="post__back"><a href="/blog">← Back to all dispatches</a></p>
+      <p class="post__back"><a href={withBase('/blog')}>← Back to all dispatches</a></p>
     </footer>
 
     <section class="post__cta wrap">

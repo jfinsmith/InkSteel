@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import Newsletter from './Newsletter.astro';
+import { withBase } from '../lib/utils';
 const year = new Date().getFullYear();
 ---
 
@@ -19,11 +20,11 @@ const year = new Date().getFullYear();
 
     <nav class="footer__links" aria-label="Footer">
       <p class="footer__heading">Sections</p>
-      <a href="/blog">The Blog</a>
-      <a href="/the-record">The Record</a>
-      <a href="/about-me">About</a>
-      <a href="/faqs">FAQ</a>
-      <a href="/rss.xml">RSS Feed</a>
+      <a href={withBase('/blog')}>The Blog</a>
+      <a href={withBase('/the-record')}>The Record</a>
+      <a href={withBase('/about-me')}>About</a>
+      <a href={withBase('/faqs')}>FAQ</a>
+      <a href={withBase('/rss.xml')}>RSS Feed</a>
     </nav>
   </div>
 

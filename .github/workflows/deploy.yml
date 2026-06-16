@@ -35,6 +35,9 @@ jobs:
       - name: Build
         run: npm run build
         env:
+          # Serve from the project subfolder while on the github.io URL.
+          # DELETE this line at custom-domain cutover so the site builds at root.
+          PAGES_BASE: /InkSteel
           # Firebase web config — set these as repository VARIABLES
           # (Settings → Secrets and variables → Actions → Variables).
           # They are public by design; data is protected by firestore.rules.

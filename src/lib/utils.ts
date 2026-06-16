@@ -14,6 +14,14 @@ export function readingTime(text: string): number {
   return Math.max(1, Math.round(words / 220));
 }
 
+/** Prefix an internal path with the site's base (handles the GitHub Pages
+ *  subfolder vs. custom-domain root). Use for every hand-written internal link. */
+export function withBase(path: string): string {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const p = path.startsWith('/') ? path : `/${path}`;
+  return `${base}${p}` || '/';
+}
+
 /** Human date, e.g. "June 4, 2025". */
 export function formatDate(d: Date, opts?: Intl.DateTimeFormatOptions): string {
   return new Intl.DateTimeFormat(

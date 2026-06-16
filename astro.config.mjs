@@ -6,8 +6,15 @@ import rehypeExternalLinks from 'rehype-external-links';
 
 // The canonical, public URL of the site. Used for sitemap, RSS, and canonical tags.
 // This is the apex domain you'll point at GitHub Pages during cutover.
+// Path-portable base. Local dev and the final custom domain serve at root ('/').
+// The GitHub Pages project URL (jfinsmith.github.io/InkSteel/) serves from a
+// subfolder, so CI sets PAGES_BASE=/InkSteel for that build. At domain cutover,
+// drop PAGES_BASE from the workflow and the site returns to root automatically.
+const base = process.env.PAGES_BASE || '/';
+
 export default defineConfig({
   site: 'https://www.inksteeljournal.com',
+  base,
   trailingSlash: 'ignore',
   // Preserve inbound links to the old Squarespace auto-slug for this post.
   // Astro emits a static redirect page (meta-refresh + canonical) for GitHub Pages.

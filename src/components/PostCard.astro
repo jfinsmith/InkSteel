@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import HeroPlate from './InkArt/HeroPlate.astro';
+import { withBase } from '../lib/utils';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -16,7 +17,7 @@ const fmt = (d: Date) =>
 ---
 
 <article class:list={['card', { 'card--featured': featured }]}>
-  <a href={`/blog/${slug}`} class="card__media" aria-hidden="true" tabindex="-1">
+  <a href={withBase(`/blog/${slug}`)} class="card__media" aria-hidden="true" tabindex="-1">
     {isRaster ? (
       <img src={heroImage} alt={heroImageAlt ?? ''} loading="lazy" width="800" height="450" />
     ) : (
@@ -26,7 +27,7 @@ const fmt = (d: Date) =>
   <div class="card__body">
     {primary && <span class="kicker">{primary}</span>}
     <h3 class="card__title">
-      <a href={`/blog/${slug}`}>{title}</a>
+      <a href={withBase(`/blog/${slug}`)}>{title}</a>
     </h3>
     <p class="card__excerpt">{excerpt}</p>
     <div class="card__meta meta">
