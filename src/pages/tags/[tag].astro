@@ -44,7 +44,7 @@ const { label, posts } = Astro.props;
 </BaseLayout>
 
 <style>
-  .page-head { max-width: 48rem; margin-inline: auto; text-align: center; padding-block: 3rem 1rem; }
+  .page-head { max-width: 62rem; padding-block: clamp(2.5rem, 6vw, 4rem) 1.25rem; }
   .page-head h1 { font-size: var(--step-4); margin: 0.6rem 0 0.4rem; }
   .page-head__sub { color: var(--ink-faint); }
   .blog-grid {

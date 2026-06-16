@@ -17,10 +17,16 @@ import { withBase } from '../lib/utils';
     </div>
   </header>
 
-  <article class="wrap about-body">
-    <div class="prose dropcap">
-      <h2>Who am I…</h2>
+  <div class="wrap longform">
+    <aside class="longform__rail">
+      <p class="longform__rail-title">Who am I</p>
+      <div class="longform__meta">
+        <p>A fifteen-year Florida law-enforcement veteran. Former academic. A reluctant realist with a sliver of hope still flickering.</p>
+        <p>Not a Democrat or a Republican — just common sense and a dash of unflinching honesty.</p>
+      </div>
+    </aside>
 
+    <article class="longform__main prose dropcap">
       <p>The hum of the patrol car's engine vibrated beneath me, a constant, low thrum against the backdrop of the Florida night. Streetlights cast long, distorted shadows, painting the asphalt in hues of amber and sickly yellow. Another shift, another night in the trenches, another chapter in the ongoing saga of humanity's capacity for both brilliance and utter, baffling stupidity.</p>
 
       <p>I wasn't born into this life. My roots lay in the hallowed halls of academia, in the quiet contemplation of chemical equations and the elegant structure of the periodic table. My childhood was a tapestry woven with Sunday sermons and the scent of well-worn Bibles, a world where faith was as tangible as the humid air. But beneath the veneer of piety, a restless curiosity simmered, a yearning to understand the world beyond the stained-glass windows.</p>
@@ -42,23 +48,20 @@ import { withBase } from '../lib/utils';
       <p>And maybe, just maybe, someone will hear our voices. Maybe a podcast, a YouTube show, or some other platform will open up, where I can share my unique perspective, where I can offer a cop's-eye view of the political landscape, where I can set the record straight on law enforcement, on politics, on anything that demands a dose of common sense and a dash of unflinching honesty.</p>
 
       <p>Until then, I'll keep writing, keep ranting, keep shining a light on the absurdities, because if we don't laugh, we'll cry. And frankly, I'm all out of tears. The Florida sun will rise again tomorrow, and the madness will continue, but I'll be here, watching, waiting, and documenting the slow-motion train wreck of our society, one snarky post at a time.</p>
-    </div>
+      <Divider />
 
-    <Divider />
-
-    <p class="about-cta">
-      <a href={withBase('/blog')} class="btn">Read the dispatches</a>
-      <a href={withBase('/the-record')} class="btn btn--ghost">See The Record</a>
-    </p>
-  </article>
+      <p class="about-cta">
+        <a href={withBase('/blog')} class="btn">Read the dispatches</a>
+        <a href={withBase('/the-record')} class="btn btn--ghost">See The Record</a>
+      </p>
+    </article>
+  </div>
 </BaseLayout>
 
 <style>
   .about-hero { position: relative; overflow: hidden; padding-block: clamp(3rem, 8vw, 5.5rem) 1rem; }
   .about-hero__splatter { position: absolute; top: -3rem; right: -4rem; width: 26rem; height: 26rem; opacity: 0.08; z-index: 0; pointer-events: none; }
-  .about-hero__inner { position: relative; z-index: 1; max-width: 50rem; }
+  .about-hero__inner { position: relative; z-index: 1; max-width: 60rem; }
   .about-hero h1 { font-size: var(--step-4); margin-top: 0.6rem; }
-  .about-body { max-width: 44rem; margin-inline: auto; padding-block: 2rem; }
-  .about-body .prose { margin-inline: 0; }
-  .about-cta { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+  .about-cta { display: flex; gap: 0.8rem; justify-content: flex-start; flex-wrap: wrap; }
 </style>
