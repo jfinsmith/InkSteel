@@ -37,7 +37,7 @@
 
   /* --- Space & shape ------------------------------------------------------ */
   --measure: 41rem;          /* ideal reading width             */
-  --wide: 82rem;             /* page max width                  */
+  --wide: 88rem;             /* page max width                  */
   --radius: 2px;             /* press-printed, barely-there     */
   --shadow: 0 1px 0 var(--paper-edge), 0 18px 40px -28px rgba(20, 19, 15, 0.45);
   --rule: 1px solid var(--paper-edge);

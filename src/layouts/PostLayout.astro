@@ -72,7 +72,7 @@ const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage
       {isRasterHero ? (
         <img src={heroImage} alt={heroImageAlt ?? title} width="1200" height="675" loading="eager" />
       ) : (
-        <HeroPlate title={title} kicker={primaryCategory ?? 'Dispatch'} seed={slug} />
+        <HeroPlate seed={slug} class="post__hero-plate" />
       )}
     </figure>
 
@@ -126,6 +126,8 @@ const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage
 
   .post__hero { max-width: var(--wide); margin: 2.5rem auto 0; }
   .post__hero img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); object-fit: cover; }
+  /* Decorative plate as a calm banner, not a tall empty box. */
+  .post__hero :global(.post__hero-plate) { aspect-ratio: auto; height: clamp(10rem, 24vw, 18rem); }
 
   .post__body { margin-top: 3rem; }
   .post__body :global(h2), .post__body :global(h3) { max-width: var(--measure); margin-inline: auto; }
