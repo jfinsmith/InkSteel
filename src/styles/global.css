@@ -37,7 +37,7 @@
 
   /* --- Space & shape ------------------------------------------------------ */
   --measure: 41rem;          /* ideal reading width             */
-  --wide: 88rem;             /* page max width                  */
+  --wide: 94rem;             /* page max width                  */
   --radius: 2px;             /* press-printed, barely-there     */
   --shadow: 0 1px 0 var(--paper-edge), 0 18px 40px -28px rgba(20, 19, 15, 0.45);
   --rule: 1px solid var(--paper-edge);
@@ -192,9 +192,16 @@ main { flex: 1 0 auto; }
 }
 @media (min-width: 64rem) {
   .longform {
-    grid-template-columns: minmax(12rem, 16rem) minmax(0, 52rem);
+    grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr);
   }
   .longform__rail { position: sticky; top: 1.5rem; align-self: start; }
+}
+/* Wide screens: contents rail · capped reading column · decorative right rail,
+   so the layout fills the page instead of stranding empty margin. */
+@media (min-width: 86rem) {
+  .longform {
+    grid-template-columns: minmax(13rem, 15rem) minmax(0, 54rem) minmax(0, 1fr);
+  }
 }
 .longform__rail { font-size: var(--step--1); color: var(--ink-faint); }
 .longform__rail-title {
@@ -224,18 +231,11 @@ main { flex: 1 0 auto; }
   margin-inline: 0;
 }
 
-/* Decorative ink wash occupying the right negative space on wide screens. */
-.longform__decor {
-  position: absolute;
-  top: 2rem;
-  right: -2vw;
-  width: clamp(12rem, 22vw, 24rem);
-  aspect-ratio: 1;
-  opacity: 0.05;
-  pointer-events: none;
-  z-index: -1;
+/* Decorative right rail — only on wide screens where the third track exists. */
+.longform__aside { display: none; }
+@media (min-width: 86rem) {
+  .longform__aside { display: block; position: sticky; top: 2.5rem; align-self: start; }
 }
-@media (max-width: 64rem) { .longform__decor { display: none; } }
 
 /* --- Drop cap (literary flourish) ---------------------------------------- */
 .dropcap > p:first-of-type::first-letter {

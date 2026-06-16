@@ -4,6 +4,7 @@ import HeroPlate from '../components/InkArt/HeroPlate.astro';
 import Divider from '../components/InkArt/Divider.astro';
 import Newsletter from '../components/Newsletter.astro';
 import ViewCounter from '../components/ViewCounter.astro';
+import RailDecor from '../components/InkArt/RailDecor.astro';
 import { slugify, withBase } from '../lib/utils';
 
 interface Props {
@@ -87,6 +88,8 @@ const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage
         <Divider />
         <Newsletter />
       </div>
+
+      <RailDecor color="var(--oxblood)" />
     </div>
   </article>
 </BaseLayout>

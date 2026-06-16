@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Splatter from '../components/InkArt/Splatter.astro';
 import Divider from '../components/InkArt/Divider.astro';
+import RailDecor from '../components/InkArt/RailDecor.astro';
 import { withBase } from '../lib/utils';
 ---
 
@@ -55,6 +56,8 @@ import { withBase } from '../lib/utils';
         <a href={withBase('/the-record')} class="btn btn--ghost">See The Record</a>
       </p>
     </article>
+
+    <RailDecor color="var(--oxblood)" />
   </div>
 </BaseLayout>
 

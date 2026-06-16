@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Divider from '../components/InkArt/Divider.astro';
-import Splatter from '../components/InkArt/Splatter.astro';
+import RailDecor from '../components/InkArt/RailDecor.astro';
 ---
 
 <BaseLayout
@@ -15,7 +15,6 @@ import Splatter from '../components/InkArt/Splatter.astro';
   </header>
 
   <div class="wrap longform">
-    <div class="longform__decor" aria-hidden="true"><Splatter color="var(--oxblood)" /></div>
     <aside class="longform__rail">
       <p class="longform__rail-title">Contents</p>
       <nav class="longform__toc">
@@ -131,6 +130,8 @@ import Splatter from '../components/InkArt/Splatter.astro';
       <li><strong>Fraudulent Elections:</strong> Attempts to manipulate or undermine the integrity of elections.</li>
       </ul>
     </article>
+
+    <RailDecor color="var(--oxblood)" />
   </div>
 </BaseLayout>
 

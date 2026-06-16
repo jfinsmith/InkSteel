@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Divider from '../components/InkArt/Divider.astro';
-import Splatter from '../components/InkArt/Splatter.astro';
+import RailDecor from '../components/InkArt/RailDecor.astro';
 ---
 
 <BaseLayout
@@ -15,7 +15,6 @@ import Splatter from '../components/InkArt/Splatter.astro';
   </header>
 
   <div class="wrap longform">
-    <div class="longform__decor" aria-hidden="true"><Splatter color="var(--steel)" /></div>
     <aside class="longform__rail">
       <p class="longform__rail-title">Contents</p>
       <nav class="longform__toc">
@@ -119,6 +118,8 @@ import Splatter from '../components/InkArt/Splatter.astro';
     <p>Post-office, Trump faced numerous legal challenges including a New York felony conviction for falsifying business records regarding hush money payments, federal and state investigations into 2020 election overturning attempts, and a civil judgment finding him liable for E. Jean Carroll sexual abuse and defamation totaling over $88 million in damages. He was ordered to pay over $450 million in the New York business fraud lawsuit.</p>
     <p>This extensive record, based on documented events, allegations, legal proceedings, and convictions, provides a comprehensive, factual basis for individuals assessing Trump's presidential fitness.</p>
     </article>
+
+    <RailDecor color="var(--steel)" />
   </div>
 </BaseLayout>
 
