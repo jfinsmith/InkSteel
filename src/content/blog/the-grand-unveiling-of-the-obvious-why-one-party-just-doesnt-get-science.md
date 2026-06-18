@@ -36,14 +36,14 @@ Ultimately, this isn't about being "pro-science" in some abstract, academic sens
 
 ## References
 
-[1] R. Frank, "Climate Change: The Consensus, The Denial, and the Evidence," _Ground News_, Jan. 15, 2025. <https://www.ground.news/article/climate-change-the-consensus-the-denial-and-the-evidence>
+[1] "Scientific Consensus: Earth's Climate Is Warming." _NASA Science_. <https://science.nasa.gov/climate-change/scientific-consensus/>
 
-[2] A. Perkins, "Arctic Melting Accelerates, Scientists Warn of Irreversible Damage," _Associated Press_, Feb. 20, 2025. <https://apnews.com/article/arctic-melting-climate-change-irreversible-damage-science-warning>
+[2] "Do Scientists Agree on Climate Change?" _NASA Science_. <https://science.nasa.gov/climate-change/faq/do-scientists-agree-on-climate-change/>
 
-[3] P. Davis, "The Weaponization of Doubt: How Misinformation Undermines Scientific Progress," _PolitiFact_, Mar. 10, 2025. <https://www.politifact.com/article/weaponization-doubt-misinformation-undermines-scientific-progress/>
+[3] "In Context: What Donald Trump Said About Disinfectant, Sun and Coronavirus." _PolitiFact_, Apr. 24, 2020. <https://www.politifact.com/article/2020/apr/24/context-what-donald-trump-said-about-disinfectant-/>
 
-[4] B. Johnson, "Trump Administration Rolls Back More Environmental Protections," _Reuters_, Apr. 5, 2025. <https://www.reuters.com/business/environment/trump-administration-rolls-back-more-environmental-protections-2025-04-05/>
+[4] "Trump's EPA Will Stop Regulating Greenhouse Gases, Setting Up a Legal Fight." _NPR_, Feb. 11, 2026. <https://www.npr.org/2026/02/11/nx-s1-5678273/trump-epa-climate-change-endangerment>
 
-[5] S. Lee, "Public Health Officials Decry Political Interference in Pandemic Response," _Bloomberg News_, May 1, 2025. <https://www.bloomberg.com/news/articles/2025-05-01/public-health-officials-decry-political-interference-in-pandemic-response>
+[5] "AP Fact Check: Trump's Baseless Theories on Coronavirus." _Associated Press / PBS NewsHour_. <https://www.pbs.org/newshour/politics/ap-fact-check-trumps-baseless-theories-on-coronavirus>
 
-[6] J. Smith, "A Look Back at Trump's Most Science-Defying Statements," _Axios_, Jan. 25, 2025. <https://www.axios.com/2025/01/25/trump-science-defying-statements-revisit>
+[6] "Trump Suggests 'Injection' of Disinfectant to Beat Coronavirus and 'Clean' the Lungs." _NBC News_, Apr. 24, 2020. <https://www.nbcnews.com/politics/donald-trump/trump-suggests-injection-disinfectant-beat-coronavirus-clean-lungs-n1191216>
