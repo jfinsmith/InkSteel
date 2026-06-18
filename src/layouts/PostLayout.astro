@@ -95,9 +95,9 @@ const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage
 </BaseLayout>
 
 <style>
-  .post__header { max-width: 60rem; padding-top: clamp(2.5rem, 6vw, 4rem); }
+  .post__header { padding-top: clamp(2.5rem, 6vw, 4rem); }
   .post__kicker { text-decoration: none; display: inline-block; margin-bottom: 1rem; }
-  .post__title { font-size: var(--step-4); margin-bottom: 0.8rem; }
+  .post__title { font-size: var(--step-4); margin-bottom: 0.8rem; max-width: 26ch; }
   .post__deck {
     font-family: var(--font-display);
     font-style: italic;

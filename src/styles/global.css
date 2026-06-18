@@ -167,12 +167,14 @@ main { flex: 1 0 auto; }
 
 /* --- Modern page layout: left-aligned header + sticky rail + wide content -- */
 /* Left-aligned page header (replaces centered "ribbon" headers). */
+/* NOTE: .phead sits on a .wrap element (centered 94rem container). We cap the
+   CHILD text widths and leave them left-aligned — never cap .phead itself, or
+   .wrap's margin:auto would re-centre the whole block. */
 .phead {
-  max-width: 62rem;
   padding-block: clamp(2.5rem, 6vw, 4.5rem) 1.5rem;
 }
 .phead .kicker { display: inline-block; margin-bottom: 0.7rem; }
-.phead h1 { font-size: var(--step-4); margin-bottom: 0.7rem; }
+.phead h1 { font-size: var(--step-4); margin-bottom: 0.7rem; max-width: 26ch; }
 .phead__sub {
   font-family: var(--font-display);
   font-style: italic;
