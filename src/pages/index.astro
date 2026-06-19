@@ -2,135 +2,154 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
-import Divider from '../components/InkArt/Divider.astro';
-import Splatter from '../components/InkArt/Splatter.astro';
 import Newsletter from '../components/Newsletter.astro';
-import { withBase } from '../lib/utils';
+import { withBase, formatDate } from '../lib/utils';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-const [featured, ...rest] = posts;
-const recent = rest.slice(0, 6);
+const [lead, second, ...restAll] = posts;
+const cards = restAll.slice(0, 6);
+const heroOf = (p: (typeof posts)[number]) =>
+  p.data.heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(p.data.heroImage)
+    ? withBase(p.data.heroImage)
+    : null;
+const today = formatDate(new Date(), { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <BaseLayout
-  title="The Ink & Steel — Bringing Common Sense to the People"
-  description="From the Desk of Sanity: sharp, sourced political commentary decoding the second Trump term. The pen is mightier than the sword."
+  title="The Ink & Steel — Uncommon Sense for the Common Man"
+  description="From the desk of sanity: sharp, sourced political commentary on the second Trump term. Uncommon sense for the common man — sharper than a tack."
 >
-  <!-- Manifesto hero -->
-  <section class="hero">
-    <div class="hero__splatter" aria-hidden="true"><Splatter color="var(--oxblood)" /></div>
-    <div class="wrap hero__inner">
-      <p class="kicker">The pen is mightier than the sword</p>
-      <h1 class="hero__headline">
-        Bringing <em>common sense</em> back to the people.
-      </h1>
-      <p class="hero__lede">
-        A personal news outlet for the politically exhausted — documenting the second
-        Trump term with wit, evidence, and an unreasonable fondness for the truth.
-      </p>
-      <div class="hero__actions">
-        <a href={withBase('/blog')} class="btn">Read the latest</a>
-        <a href={withBase('/about-me')} class="btn btn--ghost">Why this exists</a>
+  <div class="wrap front">
+    <p class="front__dateline">
+      <span>Vol. I</span><span class="front__edition">The Daily Edition</span><span>{today}</span>
+    </p>
+
+    <div class="front__lead">
+      <a class="lead__media" href={withBase(`/blog/${lead.id}`)} aria-hidden="true" tabindex="-1">
+        {heroOf(lead) && <img class="vintage" src={heroOf(lead)} alt={lead.data.heroImageAlt ?? ''} loading="eager" />}
+      </a>
+      <div class="lead__body">
+        {lead.data.categories[0] && <span class="kicker">{lead.data.categories[0]}</span>}
+        <h2 class="lead__title"><a href={withBase(`/blog/${lead.id}`)}>{lead.data.title}</a></h2>
+        <p class="lead__excerpt">{lead.data.excerpt}</p>
+        <a class="readmore" href={withBase(`/blog/${lead.id}`)}>Read More »</a>
       </div>
-    </div>
-  </section>
 
-  <Divider />
+      <aside class="front__side">
+        {second && (
+          <article class="side-story">
+            {second.data.categories[0] && <span class="kicker">{second.data.categories[0]}</span>}
+            <h3 class="side-story__title"><a href={withBase(`/blog/${second.id}`)}>{second.data.title}</a></h3>
+            <p class="side-story__excerpt">{second.data.excerpt}</p>
+            <a class="readmore" href={withBase(`/blog/${second.id}`)}>Read More »</a>
+          </article>
+        )}
 
-  {
-    featured && (
-      <section class="wrap section">
-        <h2 class="section__label"><span>Latest Dispatch</span></h2>
-        <PostCard post={featured} featured />
-      </section>
-    )
-  }
-
-  {
-    recent.length > 0 && (
-      <section class="wrap section">
-        <h2 class="section__label"><span>More from the desk</span></h2>
-        <div class="grid">
-          {recent.map((post) => <PostCard post={post} />)}
+        <div class="barometer">
+          <p class="barometer__label">Common Sense Barometer</p>
+          <svg viewBox="0 0 300 96" role="img" aria-label="Common sense barometer reading total malarkey">
+            <defs>
+              <linearGradient id="baroTrack" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#3f6f4f"/><stop offset="0.5" stop-color="#b88a3c"/><stop offset="1" stop-color="#8c2b27"/>
+              </linearGradient>
+            </defs>
+            <rect x="18" y="40" width="264" height="16" rx="8" fill="url(#baroTrack)" stroke="#7c5d24"/>
+            {Array.from({ length: 11 }).map((_, i) => (
+              <line x1={28 + i * 24.4} y1="36" x2={28 + i * 24.4} y2="60" stroke="#3a2c14" stroke-width="1" opacity="0.5" />
+            ))}
+            <g transform="translate(262 48)">
+              <polygon points="0,-22 7,2 -7,2" fill="#20180f" />
+              <circle cx="0" cy="2" r="5" fill="#20180f" />
+            </g>
+            <text x="22" y="80" font-family="var(--font-display)" font-size="12" fill="#4d4029" letter-spacing="1">SENSE</text>
+            <text x="278" y="80" text-anchor="end" font-family="var(--font-display)" font-size="12" fill="#8c2b27" letter-spacing="1">MALARKEY</text>
+          </svg>
+          <p class="barometer__status">Current Status: <strong>Total Malarkey.</strong></p>
         </div>
-        <p class="section__more">
-          <a href={withBase('/blog')} class="btn btn--ghost">Browse all dispatches →</a>
-        </p>
-      </section>
-    )
-  }
-
-  <!-- Mission band -->
-  <section class="creed">
-    <div class="wrap creed__inner">
-      <p class="creed__quote">
-        “Criticism stems from decency, truth, and the rule of law — not partisanship.
-        We document the absurd so we don't have to accept it.”
-      </p>
-      <p class="creed__by">— The Ink &amp; Steel</p>
+      </aside>
     </div>
-  </section>
 
-  <section class="wrap section section--cta">
-    <Newsletter />
-  </section>
+    <section class="front__more">
+      <h2 class="front__section"><span>More From the Desk</span></h2>
+      <div class="front__grid">
+        {cards.map((p) => <PostCard post={p} />)}
+      </div>
+      <p class="front__all"><a class="btn btn--ghost" href={withBase('/blog')}>Browse all dispatches →</a></p>
+    </section>
+
+    <section class="front__news"><Newsletter /></section>
+  </div>
 </BaseLayout>
 
 <style>
-  .hero { position: relative; overflow: hidden; padding-block: clamp(3rem, 9vw, 6.5rem); }
-  .hero__splatter {
-    position: absolute; top: -4rem; right: -3rem; width: 28rem; height: 28rem;
-    opacity: 0.08; z-index: 0; pointer-events: none;
-  }
-  .hero__inner { position: relative; z-index: 1; }
-  .hero__headline {
-    font-size: clamp(2.6rem, 1.7rem + 3.4vw, 4.6rem);
-    margin: 0.6rem 0 1.2rem;
-    letter-spacing: -0.02em;
-    max-width: 18ch;
-  }
-  .hero__headline em { color: var(--oxblood); font-style: italic; }
-  .hero__lede {
+  .front { padding-block: clamp(1.2rem, 3vw, 2rem) clamp(2.5rem, 6vw, 4rem); }
+
+  .front__dateline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-bottom: 0.7rem;
+    margin-bottom: 1.4rem;
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding-top: 0.7rem;
     font-family: var(--font-display);
-    font-size: var(--step-1);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
     color: var(--ink-soft);
-    max-width: 46rem;
-    line-height: 1.45;
   }
-  .hero__actions { display: flex; gap: 0.8rem; margin-top: 2rem; flex-wrap: wrap; }
+  .front__edition { color: var(--oxblood); font-weight: 700; }
 
-  .section { padding-block: clamp(2rem, 5vw, 3.5rem); }
-  .section__label {
-    display: flex; align-items: center; gap: 1rem;
-    font-size: var(--step-0); text-transform: uppercase; letter-spacing: 0.14em;
-    color: var(--oxblood); font-weight: 600; margin-bottom: 2rem;
-  }
-  .section__label::after { content: ''; flex: 1; height: 1px; background: var(--paper-edge); }
-  .grid {
+  /* Front-page lead: image · headline · sidebar, with newspaper rules */
+  .front__lead {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
-    gap: clamp(1.6rem, 4vw, 2.8rem);
+    grid-template-columns: 1.05fr 1.25fr 0.95fr;
+    gap: clamp(1.1rem, 2.5vw, 2rem);
   }
-  .section__more { margin-top: 2.5rem; text-align: center; }
+  .lead__media { display: block; align-self: start; }
+  .lead__media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border: 1px solid var(--paper-edge); border-radius: var(--radius); }
+  .vintage { filter: grayscale(0.18) sepia(0.16) contrast(1.05) brightness(0.99); }
 
-  .creed {
-    margin-top: 3rem;
-    background: var(--ink);
-    background-image: var(--paper-grain);
-    color: var(--paper);
-    padding-block: clamp(3rem, 8vw, 5rem);
+  .lead__body, .front__side { border-left: 1px solid var(--paper-edge); padding-left: clamp(1rem, 2vw, 1.6rem); }
+  .lead__title { font-size: var(--step-3); line-height: 1.05; margin: 0.5rem 0 0.6rem; }
+  .lead__title a, .side-story__title a { color: var(--ink); text-decoration: none; }
+  .lead__title a:hover, .side-story__title a:hover { color: var(--oxblood); }
+  .lead__excerpt { font-size: var(--step-0); color: var(--ink-soft); max-width: none; }
+  .readmore { display: inline-block; margin-top: 0.7rem; font-family: var(--font-display); font-weight: 700; font-size: var(--step--1); letter-spacing: 0.06em; text-transform: uppercase; color: var(--oxblood); text-decoration: none; }
+  .readmore:hover { color: var(--oxblood-deep); }
+
+  .side-story { padding-bottom: 1.2rem; margin-bottom: 1.2rem; border-bottom: 2px solid var(--ink); }
+  .side-story__title { font-size: var(--step-1); line-height: 1.1; margin: 0.4rem 0 0.5rem; }
+  .side-story__excerpt { font-size: var(--step--1); color: var(--ink-soft); max-width: none; }
+
+  .barometer { text-align: center; }
+  .barometer__label { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: var(--step--1); color: var(--ink); }
+  .barometer svg { width: 100%; height: auto; margin: 0.3rem 0; }
+  .barometer__status { font-family: var(--font-display); font-size: var(--step-0); color: var(--ink-soft); }
+  .barometer__status strong { color: var(--oxblood); }
+
+  /* Section heading rule */
+  .front__more { margin-top: clamp(2rem, 4vw, 3rem); }
+  .front__section { display: flex; align-items: center; gap: 1rem; font-size: var(--step-1); text-transform: uppercase; letter-spacing: 0.1em; color: var(--oxblood); margin-bottom: 1.6rem; }
+  .front__section::before, .front__section::after { content: ''; height: 2px; background: var(--ink); flex: 1; }
+  .front__section span { flex: none; }
+
+  .front__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); gap: clamp(1.4rem, 3vw, 2.2rem); }
+  .front__all { margin-top: 2rem; text-align: center; }
+  .front__news { max-width: 46rem; margin: clamp(2.5rem, 5vw, 3.5rem) auto 0; }
+
+  @media (max-width: 900px) {
+    .front__lead { grid-template-columns: 1fr 1fr; }
+    .front__side { grid-column: 1 / -1; border-left: 0; padding-left: 0; border-top: 2px solid var(--ink); padding-top: 1.2rem; }
   }
-  .creed__inner { max-width: 46rem; text-align: center; }
-  .creed__quote {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: var(--step-2);
-    line-height: 1.3;
-    max-width: none;
-    text-wrap: balance;
+  @media (max-width: 560px) {
+    .front__lead { grid-template-columns: 1fr; }
+    .lead__body { border-left: 0; padding-left: 0; }
+    .lead__media img { aspect-ratio: 16 / 10; }
   }
-  .creed__by { margin-top: 1.5rem; color: var(--steel-soft); letter-spacing: 0.06em; }
-  .section--cta { max-width: 48rem; margin-inline: auto; }
 </style>
