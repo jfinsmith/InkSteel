@@ -1,33 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Divider from '../components/InkArt/Divider.astro';
-import RailDecor from '../components/InkArt/RailDecor.astro';
 ---
 
 <BaseLayout
   title="The Record — The Ink & Steel"
   description="A fact-based account of the controversies surrounding Donald Trump, from his emergence into the public spotlight through his 2024 presidential bid — drawn from reputable sources so readers can form their own conclusions about presidential fitness."
 >
-  <header class="wrap phead">
-    <p class="kicker">The Record</p>
-    <h1>Examining the Record</h1>
-    <p class="phead__sub">The controversial journey and the question of presidential fitness.</p>
-  </header>
+  <article class="wrap">
+    <div class="longread prose">
+      <header class="longread__head">
+        <p class="kicker">The Record</p>
+        <h1>Examining the Record</h1>
+        <p class="longread__sub">The controversial journey and the question of presidential fitness.</p>
+      </header>
 
-  <div class="wrap longform">
-    <aside class="longform__rail">
-      <p class="longform__rail-title">Contents</p>
-      <nav class="longform__toc">
-        <a href="#early-years">Early Years (Pre-2015)</a>
-        <a href="#campaign-2016">The 2016 Campaign</a>
-        <a href="#presidency">The Presidency (2017–2021)</a>
-        <a href="#impeachment">Impeachment Proceedings</a>
-        <a href="#post-presidency">Post-Presidency &amp; Legal</a>
-        <a href="#conclusion">Conclusion</a>
+      <nav class="contents" aria-label="On this page">
+        <p class="contents__title">On this page</p>
+        <ol>
+          <li><a href="#early-years">Early Years (Pre-2015)</a></li>
+          <li><a href="#campaign-2016">The 2016 Presidential Campaign</a></li>
+          <li><a href="#presidency">The Presidency (2017–2021)</a></li>
+          <li><a href="#impeachment">Impeachment Proceedings</a></li>
+          <li><a href="#post-presidency">Post-Presidency &amp; Legal Challenges</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+        </ol>
       </nav>
-    </aside>
 
-    <article class="longform__main prose">
       <p class="record__lead">This report provides a fact-based account of controversies surrounding Donald Trump from his emergence into public spotlight through his 2024 presidential bid, drawing from reputable sources to allow readers to form informed conclusions about his fitness for presidency.</p>
 
       <Divider />
@@ -117,14 +116,41 @@ import RailDecor from '../components/InkArt/RailDecor.astro';
     <p>During his presidency, Trump faced two impeachment proceedings—first regarding Ukraine dealings, second following the January 6 Capitol attack. Administration policies including the travel ban, family separation, and Paris Agreement withdrawal generated widespread criticism. COVID-19 handling and frequent media conflicts drew significant debate.</p>
     <p>Post-office, Trump faced numerous legal challenges including a New York felony conviction for falsifying business records regarding hush money payments, federal and state investigations into 2020 election overturning attempts, and a civil judgment finding him liable for E. Jean Carroll sexual abuse and defamation totaling over $88 million in damages. He was ordered to pay over $450 million in the New York business fraud lawsuit.</p>
     <p>This extensive record, based on documented events, allegations, legal proceedings, and convictions, provides a comprehensive, factual basis for individuals assessing Trump's presidential fitness.</p>
-    </article>
-
-    <RailDecor color="var(--steel)" />
-  </div>
+    </div>
+  </article>
 </BaseLayout>
 
 <style>
   .record__lead { font-family: var(--font-display); font-style: italic; font-size: var(--step-1); color: var(--ink-soft); }
-  .longform__main h2 { color: var(--ink); }
-  .longform__main h3 { color: var(--oxblood); }
+  .longread :global(h2) { color: var(--ink); }
+  .longread :global(h3) { color: var(--oxblood); }
+
+  /* Inline "On this page" contents — part of the flow, not a side rail. */
+  .contents {
+    margin: 1.6rem 0 0;
+    padding: 1rem 1.3rem;
+    border: 1px solid var(--paper-edge);
+    border-radius: var(--radius);
+    background: var(--paper-deep);
+  }
+  .contents__title {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: var(--step--1);
+    color: var(--oxblood);
+    margin-bottom: 0.5rem;
+  }
+  .contents ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    columns: 2;
+    column-gap: 1.5rem;
+    font-size: var(--step--1);
+  }
+  .contents li { margin: 0.15rem 0; break-inside: avoid; }
+  .contents a { color: var(--ink-soft); text-decoration: none; }
+  .contents a:hover { color: var(--oxblood); text-decoration: underline; text-underline-offset: 0.18em; }
+  @media (max-width: 32rem) { .contents ol { columns: 1; } }
 </style>

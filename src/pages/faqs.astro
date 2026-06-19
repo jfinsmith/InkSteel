@@ -1,29 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Divider from '../components/InkArt/Divider.astro';
-import RailDecor from '../components/InkArt/RailDecor.astro';
 ---
 
 <BaseLayout
   title="FAQ — The Ink & Steel"
   description="The questions I'm asked most: Why should Donald Trump not be President? And what is fascism, and how does Trump fit the definition? A documented, fact-based reckoning."
 >
-  <header class="wrap phead">
-    <p class="kicker">Frequently Asked</p>
-    <h1>The questions, answered</h1>
-    <p class="phead__sub">My most frequently asked questions — and the documented answers.</p>
-  </header>
+  <article class="wrap">
+    <div class="longread faq prose">
+      <header class="longread__head">
+        <p class="kicker">Frequently Asked</p>
+        <h1>The questions, answered</h1>
+        <p class="longread__sub">My most frequently asked questions — and the documented answers.</p>
+      </header>
 
-  <div class="wrap longform">
-    <aside class="longform__rail">
-      <p class="longform__rail-title">Contents</p>
-      <nav class="longform__toc">
-        <a href="#why-not-president">Why Trump should not be President</a>
-        <a href="#fascism">What is fascism?</a>
-      </nav>
-    </aside>
+      <Divider />
 
-    <article class="longform__main faq prose">
       <h2 id="why-not-president">Why should Donald Trump <em>not</em> be President?</h2>
     <p class="faq__lead">Donald Trump's exhaustive controversies and legal violations (1970–2025):</p>
 
@@ -129,14 +122,12 @@ import RailDecor from '../components/InkArt/RailDecor.astro';
       <li><strong>Rampant Cronyism and Corruption:</strong> Favoritism and dishonesty within the government.</li>
       <li><strong>Fraudulent Elections:</strong> Attempts to manipulate or undermine the integrity of elections.</li>
       </ul>
-    </article>
-
-    <RailDecor color="var(--oxblood)" />
-  </div>
+    </div>
+  </article>
 </BaseLayout>
 
 <style>
-  .faq h2 { color: var(--ink); }
-  .faq h3 { color: var(--oxblood); font-size: var(--step-0); text-transform: uppercase; letter-spacing: 0.08em; }
+  .faq :global(h2) { color: var(--ink); margin-top: 1.8em; }
+  .faq :global(h3) { color: var(--oxblood); font-size: var(--step-0); text-transform: uppercase; letter-spacing: 0.08em; }
   .faq__lead { font-family: var(--font-display); font-style: italic; color: var(--ink-soft); }
 </style>

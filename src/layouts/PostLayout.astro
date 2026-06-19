@@ -4,8 +4,7 @@ import HeroPlate from '../components/InkArt/HeroPlate.astro';
 import Divider from '../components/InkArt/Divider.astro';
 import Newsletter from '../components/Newsletter.astro';
 import ViewCounter from '../components/ViewCounter.astro';
-import RailDecor from '../components/InkArt/RailDecor.astro';
-import { slugify, withBase } from '../lib/utils';
+import { slugify, withBase, formatDate } from '../lib/utils';
 
 interface Props {
   title: string;
@@ -28,8 +27,6 @@ const {
   tags, categories, heroImage, heroImageAlt, canonicalURL, slug, readingTime,
 } = Astro.props;
 
-const fmt = (d: Date) =>
-  new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(d);
 const primaryCategory = categories[0];
 const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage);
 ---
@@ -46,76 +43,224 @@ const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage
   section={primaryCategory}
   canonicalURL={canonicalURL}
 >
-  <article class="post">
-    <header class="post__header wrap">
+  <article class="read">
+    <!-- Title block: lives inside the same centered column as the body, so
+         the kicker / title / deck share one balanced left edge — nothing
+         floats off-centre against an empty right side. -->
+    <header class="read__head">
       {primaryCategory && (
-        <a href={withBase(`/categories/${slugify(primaryCategory)}`)} class="kicker post__kicker">
+        <a href={withBase(`/categories/${slugify(primaryCategory)}`)} class="kicker read__kicker">
           {primaryCategory}
         </a>
       )}
-      <h1 class="post__title">{title}</h1>
-      <p class="post__deck">{excerpt}</p>
+      <h1 class="read__title">{title}</h1>
+      <p class="read__deck">{excerpt}</p>
+
+      <div class="read__meta">
+        <span>By <strong>{author}</strong></span>
+        <span class="read__dot" aria-hidden="true">·</span>
+        <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+        <span class="read__dot" aria-hidden="true">·</span>
+        <span>{readingTime} min read</span>
+        <span class="read__dot read__dot--views" aria-hidden="true">·</span>
+        <ViewCounter slug={slug} />
+      </div>
+      {updatedDate && (
+        <p class="read__updated">Updated {formatDate(updatedDate)}</p>
+      )}
+
+      <Divider class="read__rule" />
     </header>
 
-    <figure class="post__hero wrap">
+    <!-- Hero: a contained "breakout" — wider than the text column but never a
+         full-bleed billboard. Height-capped, gently rounded, soft shadow. -->
+    <figure class="read__hero">
       {isRasterHero ? (
-        <img src={withBase(heroImage!)} alt={heroImageAlt ?? title} width="1200" height="675" loading="eager" />
+        <img
+          src={withBase(heroImage!)}
+          alt={heroImageAlt ?? title}
+          width="1200"
+          height="800"
+          loading="eager"
+          decoding="async"
+        />
       ) : (
-        <HeroPlate seed={slug} class="post__hero-plate" />
+        <HeroPlate seed={slug} class="read__hero-plate" />
+      )}
+      {heroImageAlt && isRasterHero && (
+        <figcaption class="read__caption">{heroImageAlt}</figcaption>
       )}
     </figure>
 
-    <div class="wrap longform">
-      <aside class="longform__rail">
-        <div class="longform__meta post__meta">
-          <p>By <strong>{author}</strong></p>
-          <p><time datetime={pubDate.toISOString()}>{fmt(pubDate)}</time></p>
-          <p>{readingTime} min read · <ViewCounter slug={slug} /></p>
-          {updatedDate && <p class="post__updated">Updated {fmt(updatedDate)}</p>}
-        </div>
-        {tags.length > 0 && (
-          <div class="post__tags">
-            {tags.map((t) => (
-              <a class="chip" href={withBase(`/tags/${slugify(t)}`)}>#{t}</a>
-            ))}
-          </div>
-        )}
-        <p class="post__back"><a href={withBase('/blog')}>← All dispatches</a></p>
-      </aside>
+    <!-- One cohesive reading column holds the whole essay; no rails, no
+         columned "bricks", flows straight down the page. -->
+    <div class="read__body prose dropcap">
+      <slot />
+    </div>
 
-      <div class="longform__main prose dropcap">
-        <slot />
-        <Divider />
+    <Divider class="read__rule read__rule--end" />
+
+    <footer class="read__foot">
+      {tags.length > 0 && (
+        <div class="read__tags">
+          {tags.map((t) => (
+            <a class="chip" href={withBase(`/tags/${slugify(t)}`)}>#{t}</a>
+          ))}
+        </div>
+      )}
+
+      <div class="read__news">
         <Newsletter />
       </div>
 
-      <RailDecor color="var(--oxblood)" />
-    </div>
+      <p class="read__back">
+        <a href={withBase('/blog')}>← Back to all dispatches</a>
+      </p>
+    </footer>
   </article>
 </BaseLayout>
 
 <style>
-  .post__header { padding-top: clamp(2.5rem, 6vw, 4rem); }
-  .post__kicker { text-decoration: none; display: inline-block; margin-bottom: 1rem; }
-  .post__title { font-size: var(--step-4); margin-bottom: 0.8rem; max-width: 26ch; }
-  .post__deck {
+  /* ----------------------------------------------------------------------
+     Unified centered long-read.
+     A single centered column (--read-col) governs every block. The hero is
+     the only element allowed to "break out" a little wider (--read-hero).
+     Everything is left-aligned WITHIN that column so margins stay balanced.
+     ---------------------------------------------------------------------- */
+  .read {
+    --read-col: 45rem;     /* the one reading measure                     */
+    --read-hero: 58rem;    /* tasteful breakout for the hero only         */
+    --read-gutter: clamp(1.1rem, 4vw, 2.5rem);
+    padding-bottom: clamp(3rem, 7vw, 5rem);
+  }
+
+  /* Shared centered column. Children stay left-aligned inside it. */
+  .read__head,
+  .read__body,
+  .read__foot,
+  .read :global(.read__rule) {
+    width: 100%;
+    max-width: var(--read-col);
+    margin-inline: auto;
+    padding-inline: var(--read-gutter);
+  }
+
+  /* --- Title block ------------------------------------------------------ */
+  .read__head { padding-top: clamp(2.5rem, 6vw, 4.5rem); }
+  .read__kicker {
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 0.9rem;
+  }
+  .read__title {
+    font-size: var(--step-4);
+    line-height: 1.04;
+    margin-bottom: 0.7rem;
+    /* full column width — no narrow ch cap that would shove it left */
+  }
+  .read__deck {
     font-family: var(--font-display);
     font-style: italic;
     font-size: var(--step-2);
+    line-height: 1.28;
     color: var(--ink-soft);
-    max-width: 44rem;
+    max-width: none;
   }
 
-  .post__hero { max-width: var(--wide); margin: 2.5rem auto 0; }
-  .post__hero img { width: 100%; aspect-ratio: 16 / 9; border-radius: var(--radius); box-shadow: var(--shadow); object-fit: cover; }
-  /* Decorative plate as a calm banner, not a tall empty box. */
-  .post__hero :global(.post__hero-plate) { aspect-ratio: auto; height: clamp(10rem, 22vw, 17rem); }
+  .read__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin-top: 1.4rem;
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    letter-spacing: 0.01em;
+  }
+  .read__meta strong { color: var(--ink); font-weight: 650; }
+  .read__meta time { color: var(--ink-faint); }
+  .read__dot { color: var(--paper-edge); }
+  /* The view counter starts hidden; hide its leading dot until it appears. */
+  .read__dot--views { display: none; }
+  .read__meta:has(.views:not([hidden])) .read__dot--views { display: inline; }
+  .read__meta :global(.views) { color: var(--ink-faint); }
 
-  .post__meta strong { color: var(--ink); }
-  .post__meta time { color: var(--ink-soft); }
-  .post__updated { font-style: italic; }
-  .post__tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.4rem; }
-  .post__back { margin-top: 1.4rem; }
-  .post__back a { font-family: var(--font-display); text-decoration: none; }
-  .post__back a:hover { color: var(--oxblood); }
+  .read__updated {
+    margin-top: 0.5rem;
+    font-style: italic;
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+  }
+
+  /* Brush divider sits left-aligned with the text, not floated center-wide */
+  .read :global(.read__rule) { margin-block: clamp(1.6rem, 3vw, 2.2rem); }
+  .read :global(.read__rule .ink-divider),
+  .read :global(.read__rule.ink-divider) { margin-inline: 0; }
+
+  /* --- Hero: contained breakout ---------------------------------------- */
+  .read__hero {
+    width: 100%;
+    max-width: var(--read-hero);
+    margin: clamp(1.8rem, 4vw, 2.6rem) auto 0;
+    padding-inline: var(--read-gutter);
+  }
+  .read__hero img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    max-height: 26rem;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+  .read__hero :global(.read__hero-plate) {
+    aspect-ratio: 3 / 2;
+    max-height: 26rem;
+  }
+  .read__caption {
+    margin-top: 0.7rem;
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* --- Body: one flowing column, comfortable long-read type ------------ */
+  .read__body {
+    margin-top: clamp(2.4rem, 5vw, 3.4rem);
+    font-size: clamp(1.1rem, 1.04rem + 0.3vw, 1.24rem);
+    line-height: 1.75;
+  }
+  .read__body :global(h2) { margin-top: 2em; }
+
+  /* Pull-quotes: let blockquotes breathe slightly past the text edge for a
+     premium editorial feel — still anchored, never a separate column. */
+  .read__body :global(blockquote) {
+    max-width: none;
+    margin-inline: clamp(-1.4rem, -2.5vw, -2.6rem);
+    padding: 0.6em 0 0.6em 1.6em;
+    border-left-width: 3px;
+  }
+  @media (max-width: 40rem) {
+    .read__body :global(blockquote) { margin-inline: 0; }
+  }
+  .read__body :global(figure),
+  .read__body :global(img) { max-width: none; }
+
+  /* --- Footer ---------------------------------------------------------- */
+  .read :global(.read__rule--end) { margin-top: clamp(2.6rem, 5vw, 3.6rem); }
+  .read__foot { display: block; }
+  .read__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: clamp(2.2rem, 5vw, 3rem);
+  }
+  .read__news { margin-bottom: clamp(2rem, 4vw, 2.6rem); }
+  .read__back a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+  .read__back a:hover { color: var(--oxblood); }
 </style>
