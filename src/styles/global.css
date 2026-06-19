@@ -172,8 +172,8 @@ main { flex: 1 0 auto; }
 .phead__sub { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: var(--step-1); color: var(--ink-soft); max-width: 44rem; }
 
 /* --- Single centered reading column (long-form content pages) ------------- */
-.longread { max-width: 54rem; margin-inline: auto; }
-.longread.prose { max-width: 54rem; margin-inline: auto; }
+.longread { max-width: 72rem; margin-inline: auto; font-size: clamp(1.08rem, 1rem + 0.3vw, 1.22rem); line-height: 1.72; }
+.longread.prose { max-width: 72rem; margin-inline: auto; }
 .longread.prose :where(p, ul, ol, h2, h3, h4, blockquote, figure) { max-width: none; margin-inline: 0; }
 .longread__head { padding-top: clamp(2rem, 5vw, 3.2rem); }
 .longread__head .kicker { display: inline-block; margin-bottom: 0.8rem; }

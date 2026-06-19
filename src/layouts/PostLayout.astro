@@ -140,32 +140,16 @@ const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage
   .bp__byline :global(.views) { color: var(--ink-faint); }
   .bp__updated { margin-top: 0.35rem; font-style: italic; font-size: var(--step--1); color: var(--ink-faint); }
 
-  /* --- Broadsheet body: multi-column newspaper text -------------------- */
-  .bp__body { max-width: none; font-size: clamp(1.04rem, 1rem + 0.25vw, 1.16rem); line-height: 1.7; }
-  .bp__body :global(:where(p, ul, ol, blockquote, h2, h3, h4, figure, img)) { max-width: none; }
-
-  @media (min-width: 52rem) {
-    .bp__body {
-      column-count: 2;
-      column-gap: clamp(2rem, 3.5vw, 3.4rem);
-      column-rule: 1px solid var(--paper-edge);
-      text-align: justify;
-      hyphens: auto;
-    }
-    /* Section headings span both columns, like a newspaper subhead. */
-    .bp__body :global(h2) {
-      column-span: all;
-      text-align: left;
-      margin-top: 1.4em;
-      padding-top: 0.6rem;
-      border-top: 1px solid var(--paper-edge);
-    }
-    .bp__body :global(blockquote),
-    .bp__body :global(h3),
-    .bp__body :global(figure) { break-inside: avoid; }
+  /* --- Body: one comfortable column, larger type ---------------------- */
+  .bp__body {
+    max-width: 64rem;
+    margin-inline: auto;
+    font-size: clamp(1.18rem, 1.08rem + 0.45vw, 1.34rem);
+    line-height: 1.72;
   }
-  .bp__body :global(h2:first-child),
-  .bp__body :global(p:first-child) { margin-top: 0; padding-top: 0; border-top: 0; }
+  .bp__body :global(:where(p, ul, ol, blockquote, h2, h3, h4, figure, img)) { max-width: none; }
+  .bp__body :global(h2) { margin-top: 1.5em; }
+  .bp__body :global(h2:first-child), .bp__body :global(p:first-child) { margin-top: 0; }
 
   /* --- Footer ---------------------------------------------------------- */
   .bp :global(.bp__rule) { margin-block: clamp(2rem, 4vw, 2.8rem); }
