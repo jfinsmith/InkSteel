@@ -7,7 +7,8 @@ pubDate: 2025-05-19
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Trump Administration", "Economic Analysis"]
 tags: ["Donald Trump", "Second Term", "US Credit Rating", "Moody's", "National Debt", "Fiscal Deficit", "Economic Policy", "Financial Markets"]
-heroImageAlt: "An ink-wash illustration of three gold rating stars with the top one cracking and falling away."
+heroImage: "/images/posts/another-one-bites-the-dust-moodys-finally-admits-what-we-already-knew-about-trumps-america.jpg"
+heroImageAlt: "Illustration on the Moody's downgrade of the U.S. credit rating."
 heroImagePrompt: "Editorial ink-wash illustration on warm cream paper, deep black brushstrokes with one oxblood-red accent. A row of gilded 'AAA' rating stars mounted on a wall, the top star cracking and tumbling, ink dripping from the fracture. Literary financial-cartoon style, no text, 16:9."
 draft: false
 ---

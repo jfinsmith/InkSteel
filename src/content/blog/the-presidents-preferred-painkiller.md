@@ -7,7 +7,8 @@ pubDate: 2025-11-11
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Trump Administration", "Public Health Policy", "Science & Reality"]
 tags: ["Donald Trump", "RFK Jr", "Tylenol", "Acetaminophen", "Autism", "Public Health", "Vaccines", "Science", "Second Term"]
-heroImageAlt: "An ink-wash illustration of a Tylenol bottle wrapped in tinfoil, set against an evidence pyramid."
+heroImage: "/images/posts/the-presidents-preferred-painkiller.png"
+heroImageAlt: "Illustration on the Trump administration's Tylenol-autism claim and public health."
 heroImagePrompt: "Editorial ink-wash illustration on warm cream paper, deep black sumi-e brushstrokes with one oxblood-red accent. A generic white pill bottle crowned with a crumpled tinfoil hat, standing before a faint pyramid diagram (the hierarchy of evidence). Restrained literary political-cartoon style, no text, 16:9."
 draft: false
 ---

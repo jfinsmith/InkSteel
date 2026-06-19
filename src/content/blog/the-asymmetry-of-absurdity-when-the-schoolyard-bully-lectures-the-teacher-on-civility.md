@@ -7,7 +7,8 @@ pubDate: 2026-05-11
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "Trump Administration", "US Politics"]
 tags: ["Donald Trump", "JD Vance", "Sebastian Gorka", "Political Rhetoric", "GOP Leadership", "False Equivalence", "Second Term", "Media Criticism"]
-heroImageAlt: "An ink-wash illustration contrasting a towering megaphone with a tiny whisper, weighing rhetoric on an unbalanced scale."
+heroImage: "/images/posts/the-asymmetry-of-absurdity-when-the-schoolyard-bully-lectures-the-teacher-on-civility.png"
+heroImageAlt: "Illustration on political rhetoric and false equivalence in the second Trump term."
 heroImagePrompt: "Editorial ink-wash illustration on warm cream paper, deep black brushstrokes with a single oxblood-red accent. An old brass balance scale: on one heavy pan, a giant presidential podium and megaphone crushing it down; on the high, weightless pan, a tiny smartphone. Literary political-cartoon style, no text, 16:9."
 draft: false
 ---

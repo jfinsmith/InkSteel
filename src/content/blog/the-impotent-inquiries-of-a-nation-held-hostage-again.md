@@ -7,7 +7,8 @@ pubDate: 2025-05-06
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Trump Administration"]
 tags: ["Donald Trump", "Second Term", "Congressional Oversight", "House Republicans", "Resolutions of Inquiry", "Accountability", "Checks and Balances", "Democracy"]
-heroImageAlt: "An ink-wash illustration of a magnifying glass being snapped in half over a closed government door."
+heroImage: "/images/posts/the-impotent-inquiries-of-a-nation-held-hostage-again.jpg"
+heroImageAlt: "Illustration on blocked congressional oversight and the erosion of checks and balances."
 heroImagePrompt: "Editorial ink-wash illustration on warm cream paper, deep black brushstrokes with one oxblood-red accent. A large magnifying glass snapped in two before a heavy, bolted government door marked with a faint Capitol motif. Literary political-cartoon style, no text, 16:9."
 draft: false
 ---

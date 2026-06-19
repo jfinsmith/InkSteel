@@ -107,7 +107,7 @@ const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage
   }
 
   .post__hero { max-width: var(--wide); margin: 2.5rem auto 0; }
-  .post__hero img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); object-fit: cover; }
+  .post__hero img { width: 100%; aspect-ratio: 16 / 9; border-radius: var(--radius); box-shadow: var(--shadow); object-fit: cover; }
   /* Decorative plate as a calm banner, not a tall empty box. */
   .post__hero :global(.post__hero-plate) { aspect-ratio: auto; height: clamp(10rem, 22vw, 17rem); }
 

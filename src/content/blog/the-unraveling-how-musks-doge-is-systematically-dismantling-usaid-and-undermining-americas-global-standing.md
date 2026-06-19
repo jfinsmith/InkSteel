@@ -7,7 +7,8 @@ pubDate: 2025-05-06
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Trump Administration"]
 tags: ["Elon Musk", "DOGE", "USAID", "Foreign Aid", "Humanitarian Aid", "Soft Power", "Government Efficiency", "Second Term"]
-heroImageAlt: "An ink-wash illustration of a globe held together by fraying thread, a hand pulling one strand loose."
+heroImage: "/images/posts/the-unraveling-how-musks-doge-is-systematically-dismantling-usaid-and-undermining-americas-global-standing.jpg"
+heroImageAlt: "Illustration on Musk's DOGE dismantling USAID and U.S. soft power."
 heroImagePrompt: "Editorial ink-wash illustration on warm cream paper, deep black brushstrokes with one oxblood-red accent. A globe stitched together with thread, one long strand being pulled loose by an anonymous hand, continents beginning to unravel. Somber, literary political-cartoon style, no text, 16:9."
 draft: false
 ---

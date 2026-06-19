@@ -7,7 +7,8 @@ pubDate: 2025-05-29
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Trump Administration", "Science & Society"]
 tags: ["Donald Trump", "Second Term", "Science Denial", "Climate Change", "Scientific Method", "Misinformation", "Republican Party", "Satire"]
-heroImageAlt: "An ink-wash illustration of a chessboard where one player rearranges the rules mid-game."
+heroImage: "/images/posts/the-grand-unveiling-of-the-obvious-why-one-party-just-doesnt-get-science.jpg"
+heroImageAlt: "Illustration on science denial and the rejection of evidence in politics."
 heroImagePrompt: "Editorial ink-wash illustration on warm cream paper, deep black sumi-e brushstrokes with one oxblood-red accent. A chessboard mid-game where a hand drags a pawn diagonally off its lane, knocking pieces askew; a faint scientific-method loop (observe → hypothesize → test) sketched behind. Witty, literary political-cartoon style, no text, 16:9."
 draft: false
 ---

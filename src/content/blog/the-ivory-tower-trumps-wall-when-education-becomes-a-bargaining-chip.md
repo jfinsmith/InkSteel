@@ -7,7 +7,8 @@ pubDate: 2025-05-22
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Education Policy", "Trump Administration"]
 tags: ["Donald Trump", "Second Term", "Higher Education", "International Students", "Harvard", "Academic Freedom", "Nativism", "Isolationism", "Satire"]
-heroImageAlt: "An ink-wash illustration of a university gate being bricked shut, a graduation cap left outside."
+heroImage: "/images/posts/the-ivory-tower-trumps-wall-when-education-becomes-a-bargaining-chip.jpg"
+heroImageAlt: "Illustration on higher education and the block on international students."
 heroImagePrompt: "Editorial ink-wash illustration on warm cream paper, deep black brushstrokes with one oxblood-red accent. A grand ivy-columned university gate being bricked over mid-arch, a lone graduation mortarboard resting on the ground outside the wall. Literary political-cartoon style, no text, 16:9."
 draft: false
 ---

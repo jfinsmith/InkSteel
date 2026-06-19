@@ -7,7 +7,8 @@ pubDate: 2025-08-29
 author: "Justin Smith"
 categories: ["Political Commentary", "Gun Control", "Opinion", "US Politics", "Trump Administration"]
 tags: ["Donald Trump", "Second Term", "Gun Violence", "School Shootings", "Gun Control", "Second Amendment", "Public Safety"]
-heroImageAlt: "An ink-wash illustration of an empty school desk beneath a stained-glass window, a single chair overturned."
+heroImage: "/images/posts/the-real-cost-of-making-america-great-again-our-childrens-lives.jpg"
+heroImageAlt: "Illustration on gun violence and school safety in Trump's America."
 heroImagePrompt: "Editorial ink-wash illustration on warm cream paper, deep black brushstrokes with one oxblood-red accent. A single empty child's school desk beneath a broken stained-glass window, soft light falling across the floor. Somber, restrained, literary — grief without gore, no text, 16:9."
 draft: false
 ---

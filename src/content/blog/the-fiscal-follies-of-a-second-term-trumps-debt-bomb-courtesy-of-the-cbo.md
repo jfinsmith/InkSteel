@@ -7,7 +7,8 @@ pubDate: 2025-06-04
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Trump Administration", "Economics"]
 tags: ["Donald Trump", "Second Term", "Tax Cuts", "National Debt", "CBO", "Fiscal Policy", "Budget Deficit", "Satire", "US News"]
-heroImageAlt: "An ink-wash illustration of a ticking debt bomb shaped like the U.S. Capitol dome."
+heroImage: "/images/posts/the-fiscal-follies-of-a-second-term-trumps-debt-bomb-courtesy-of-the-cbo.jpg"
+heroImageAlt: "Illustration evoking Trump's tax cuts and the ballooning national debt."
 heroImagePrompt: "Editorial ink-wash illustration, warm cream paper texture, deep black sumi-e brushstrokes with a single oxblood-red accent. A lit cartoon bomb whose round body is the U.S. Capitol dome, fuse burning, sitting atop a teetering stack of dollar bills. Sharp political-cartoon sensibility, literary and restrained, no text. 16:9."
 draft: false
 ---
