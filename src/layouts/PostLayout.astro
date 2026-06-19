@@ -59,7 +59,7 @@ const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage
 
     <figure class="post__hero wrap">
       {isRasterHero ? (
-        <img src={heroImage} alt={heroImageAlt ?? title} width="1200" height="675" loading="eager" />
+        <img src={withBase(heroImage!)} alt={heroImageAlt ?? title} width="1200" height="675" loading="eager" />
       ) : (
         <HeroPlate seed={slug} class="post__hero-plate" />
       )}

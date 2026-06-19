@@ -14,9 +14,9 @@ draft: false
 
 Well, folks, it appears that the concept of "rule of law" is just another one of those quaint, outdated notions that our esteemed President Donald Trump finds inconvenient. Who knew that those pesky court orders, those tedious pronouncements from black-robed figures, were merely...suggestions? Apparently, in Trump's America, they hold about as much weight as a tweet from a bot account with 12 followers.
 
-Let's dive into the latest episode of "Trump vs. The Judiciary," shall we? According to recent reports, the Trump administration has, once again, thumbed its nose at a court order, this time concerning [insert specific details of the court order violation from the provided article]. Yes, you heard that right. Not only does this administration believe it's above Congress, above basic ethics, but now, it seems, they're taking on the entire judicial branch. Because why not? It's not like the Constitution matters anymore, right?
+Let's dive into the latest episode of "Trump vs. The Judiciary," shall we? According to recent reports, the Trump administration has, once again, thumbed its nose at a court order, this time over its open defiance of U.S. District Judge James Boasberg's March 15 order to halt deportations under the centuries-old Alien Enemies Act and turn two planeloads of detainees around mid-flight — planes that, conveniently, landed in El Salvador anyway [1]. Yes, you heard that right. Not only does this administration believe it's above Congress, above basic ethics, but now, it seems, they're taking on the entire judicial branch. Because why not? It's not like the Constitution matters anymore, right?
 
-Now, for those of you keeping score at home, this isn't exactly a new development. Trump's history with court orders is about as cozy as a porcupine at a balloon convention. Remember the travel ban? The Mueller investigation? The numerous attempts to withhold documents from pesky oversight committees? Each instance was a masterclass in how to treat the American legal system like a discarded napkin. [Link to relevant article from trusted sources]
+Now, for those of you keeping score at home, this isn't exactly a new development. Trump's history with court orders is about as cozy as a porcupine at a balloon convention. Remember the travel ban? The Mueller investigation? The numerous attempts to withhold documents from pesky oversight committees? Each instance was a masterclass in how to treat the American legal system like a discarded napkin. This time, though, the judge wasn't amused: Boasberg later found "probable cause" to hold the administration in criminal contempt, citing its "willful disregard" for his order [1].
 
 And yet, here we are again, watching as the administration openly defies the very institutions designed to keep it in check. It's like watching a toddler throw a tantrum in a china shop, only the toddler has access to nuclear codes and the china shop is the United States of America.
 
@@ -31,3 +31,7 @@ But here's the thing: this isn't just about politics. It's about basic decency. 
 So, where do we go from here? Well, that's the million-dollar question, isn't it? Do we continue to watch as our institutions crumble under the weight of this administration's arrogance? Or do we finally say enough is enough? Do we finally demand a return to some semblance of normalcy, to a time when court orders meant something, and the rule of law wasn't just a punchline?
 
 One can hope, anyway. Because if we don't, we might as well just hand over the keys to the kingdom and let the chaos reign supreme. And trust me, nobody wants that.
+
+## References
+
+[1] "Judge: 'Probable cause' to hold U.S. in contempt over Alien Enemies Act deportations." _NPR_, Apr. 16, 2025. <https://www.npr.org/2025/04/16/g-s1-60696/judge-contempt-alien-enemies-act>

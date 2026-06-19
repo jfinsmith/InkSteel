@@ -19,7 +19,7 @@ const fmt = (d: Date) =>
 <article class:list={['card', { 'card--featured': featured }]}>
   <a href={withBase(`/blog/${slug}`)} class="card__media" aria-hidden="true" tabindex="-1">
     {isRaster ? (
-      <img src={heroImage} alt={heroImageAlt ?? ''} loading="lazy" width="800" height="450" />
+      <img src={withBase(heroImage!)} alt={heroImageAlt ?? ''} loading="lazy" width="800" height="450" />
     ) : (
       <HeroPlate seed={slug} />
     )}
