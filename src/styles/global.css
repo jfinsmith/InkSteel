@@ -44,8 +44,8 @@
   --step-5: clamp(3rem, 2.2rem + 4vw, 5.4rem);
 
   /* --- Space & shape ------------------------------------------------------ */
-  --measure: 44rem;
-  --wide: 76rem;             /* the broadsheet page width        */
+  --measure: 46rem;
+  --wide: 86rem;             /* the broadsheet page width (~90% on desktop) */
   --radius: 3px;
   --shadow: 0 2px 4px rgba(14, 23, 48, 0.18), 0 24px 48px -28px rgba(14, 23, 48, 0.5);
   --rule: 1px solid var(--paper-edge);
@@ -172,8 +172,8 @@ main { flex: 1 0 auto; }
 .phead__sub { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: var(--step-1); color: var(--ink-soft); max-width: 44rem; }
 
 /* --- Single centered reading column (long-form content pages) ------------- */
-.longread { max-width: 50rem; margin-inline: auto; }
-.longread.prose { max-width: 50rem; margin-inline: auto; }
+.longread { max-width: 54rem; margin-inline: auto; }
+.longread.prose { max-width: 54rem; margin-inline: auto; }
 .longread.prose :where(p, ul, ol, h2, h3, h4, blockquote, figure) { max-width: none; margin-inline: 0; }
 .longread__head { padding-top: clamp(2rem, 5vw, 3.2rem); }
 .longread__head .kicker { display: inline-block; margin-bottom: 0.8rem; }
