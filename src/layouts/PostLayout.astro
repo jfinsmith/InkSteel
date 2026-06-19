@@ -43,224 +43,135 @@ const isRasterHero = heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(heroImage
   section={primaryCategory}
   canonicalURL={canonicalURL}
 >
-  <article class="read">
-    <!-- Title block: lives inside the same centered column as the body, so
-         the kicker / title / deck share one balanced left edge — nothing
-         floats off-centre against an empty right side. -->
-    <header class="read__head">
-      {primaryCategory && (
-        <a href={withBase(`/categories/${slugify(primaryCategory)}`)} class="kicker read__kicker">
-          {primaryCategory}
-        </a>
-      )}
-      <h1 class="read__title">{title}</h1>
-      <p class="read__deck">{excerpt}</p>
-
-      <div class="read__meta">
-        <span>By <strong>{author}</strong></span>
-        <span class="read__dot" aria-hidden="true">·</span>
-        <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
-        <span class="read__dot" aria-hidden="true">·</span>
-        <span>{readingTime} min read</span>
-        <span class="read__dot read__dot--views" aria-hidden="true">·</span>
-        <ViewCounter slug={slug} />
+  <article class="bp wrap">
+    <!-- Front-of-article: hero image on the left, masthead (kicker/title/deck/
+         byline) beside it. Spans the full sheet so nothing is smooshed. -->
+    <header class="bp__head">
+      <div class="bp__media">
+        {isRasterHero ? (
+          <img src={withBase(heroImage!)} alt={heroImageAlt ?? title} width="900" height="675" loading="eager" decoding="async" />
+        ) : (
+          <HeroPlate seed={slug} />
+        )}
+        {heroImageAlt && isRasterHero && <p class="bp__caption">{heroImageAlt}</p>}
       </div>
-      {updatedDate && (
-        <p class="read__updated">Updated {formatDate(updatedDate)}</p>
-      )}
 
-      <Divider class="read__rule" />
+      <div class="bp__intro">
+        {primaryCategory && (
+          <a href={withBase(`/categories/${slugify(primaryCategory)}`)} class="kicker">{primaryCategory}</a>
+        )}
+        <h1 class="bp__title">{title}</h1>
+        <p class="bp__deck">{excerpt}</p>
+        <div class="bp__byline">
+          <span>By <strong>{author}</strong></span>
+          <span class="bp__sep" aria-hidden="true">·</span>
+          <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+          <span class="bp__sep" aria-hidden="true">·</span>
+          <span>{readingTime} min read</span>
+          <span class="bp__sep bp__sep--views" aria-hidden="true">·</span>
+          <ViewCounter slug={slug} />
+        </div>
+        {updatedDate && <p class="bp__updated">Updated {formatDate(updatedDate)}</p>}
+      </div>
     </header>
 
-    <!-- Hero: a contained "breakout" — wider than the text column but never a
-         full-bleed billboard. Height-capped, gently rounded, soft shadow. -->
-    <figure class="read__hero">
-      {isRasterHero ? (
-        <img
-          src={withBase(heroImage!)}
-          alt={heroImageAlt ?? title}
-          width="1200"
-          height="800"
-          loading="eager"
-          decoding="async"
-        />
-      ) : (
-        <HeroPlate seed={slug} class="read__hero-plate" />
-      )}
-      {heroImageAlt && isRasterHero && (
-        <figcaption class="read__caption">{heroImageAlt}</figcaption>
-      )}
-    </figure>
-
-    <!-- One cohesive reading column holds the whole essay; no rails, no
-         columned "bricks", flows straight down the page. -->
-    <div class="read__body prose dropcap">
+    <!-- Broadsheet body: text flows across the full width in newspaper columns -->
+    <div class="bp__body prose dropcap">
       <slot />
     </div>
 
-    <Divider class="read__rule read__rule--end" />
+    <Divider class="bp__rule" />
 
-    <footer class="read__foot">
+    <footer class="bp__foot">
       {tags.length > 0 && (
-        <div class="read__tags">
-          {tags.map((t) => (
-            <a class="chip" href={withBase(`/tags/${slugify(t)}`)}>#{t}</a>
-          ))}
+        <div class="bp__tags">
+          {tags.map((t) => <a class="chip" href={withBase(`/tags/${slugify(t)}`)}>#{t}</a>)}
         </div>
       )}
-
-      <div class="read__news">
-        <Newsletter />
-      </div>
-
-      <p class="read__back">
-        <a href={withBase('/blog')}>← Back to all dispatches</a>
-      </p>
+      <div class="bp__news"><Newsletter /></div>
+      <p class="bp__back"><a href={withBase('/blog')}>← Back to all dispatches</a></p>
     </footer>
   </article>
 </BaseLayout>
 
 <style>
-  /* ----------------------------------------------------------------------
-     Unified centered long-read.
-     A single centered column (--read-col) governs every block. The hero is
-     the only element allowed to "break out" a little wider (--read-hero).
-     Everything is left-aligned WITHIN that column so margins stay balanced.
-     ---------------------------------------------------------------------- */
-  .read {
-    --read-col: 48rem;     /* the one reading measure                     */
-    --read-hero: 66rem;    /* tasteful breakout for the hero only         */
-    --read-gutter: clamp(1.1rem, 4vw, 2.5rem);
-    padding-bottom: clamp(3rem, 7vw, 5rem);
-  }
+  .bp { padding-block: clamp(1.4rem, 3.5vw, 2.4rem) clamp(2.5rem, 6vw, 4rem); }
 
-  /* Shared centered column. Children stay left-aligned inside it. */
-  .read__head,
-  .read__body,
-  .read__foot,
-  .read :global(.read__rule) {
+  /* --- Masthead: image left, title block beside it ---------------------- */
+  .bp__head {
+    display: grid;
+    gap: clamp(1.2rem, 3vw, 2.4rem);
+    align-items: start;
+    padding-bottom: 1.4rem;
+    margin-bottom: 1.8rem;
+    border-bottom: 4px double var(--ink);
+  }
+  @media (min-width: 52rem) {
+    .bp__head { grid-template-columns: minmax(0, 40%) 1fr; }
+  }
+  .bp__media img,
+  .bp__media :global(.hero-plate) {
     width: 100%;
-    max-width: var(--read-col);
-    margin-inline: auto;
-    padding-inline: var(--read-gutter);
-  }
-
-  /* --- Title block ------------------------------------------------------ */
-  .read__head { padding-top: clamp(2.5rem, 6vw, 4.5rem); }
-  .read__kicker {
-    text-decoration: none;
-    display: inline-block;
-    margin-bottom: 0.9rem;
-  }
-  .read__title {
-    font-size: var(--step-4);
-    line-height: 1.04;
-    margin-bottom: 0.7rem;
-    /* full column width — no narrow ch cap that would shove it left */
-  }
-  .read__deck {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: var(--step-2);
-    line-height: 1.28;
-    color: var(--ink-soft);
-    max-width: none;
-  }
-
-  .read__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.4rem;
-    margin-top: 1.4rem;
-    font-size: var(--step--1);
-    color: var(--ink-faint);
-    letter-spacing: 0.01em;
-  }
-  .read__meta strong { color: var(--ink); font-weight: 650; }
-  .read__meta time { color: var(--ink-faint); }
-  .read__dot { color: var(--paper-edge); }
-  /* The view counter starts hidden; hide its leading dot until it appears. */
-  .read__dot--views { display: none; }
-  .read__meta:has(.views:not([hidden])) .read__dot--views { display: inline; }
-  .read__meta :global(.views) { color: var(--ink-faint); }
-
-  .read__updated {
-    margin-top: 0.5rem;
-    font-style: italic;
-    font-size: var(--step--1);
-    color: var(--ink-faint);
-  }
-
-  /* Brush divider sits left-aligned with the text, not floated center-wide */
-  .read :global(.read__rule) { margin-block: clamp(1.6rem, 3vw, 2.2rem); }
-  .read :global(.read__rule .ink-divider),
-  .read :global(.read__rule.ink-divider) { margin-inline: 0; }
-
-  /* --- Hero: contained breakout ---------------------------------------- */
-  .read__hero {
-    width: 100%;
-    max-width: var(--read-hero);
-    margin: clamp(1.8rem, 4vw, 2.6rem) auto 0;
-    padding-inline: var(--read-gutter);
-  }
-  .read__hero img {
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    max-height: 26rem;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
+    border: 1px solid var(--paper-edge);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+    filter: grayscale(0.16) sepia(0.14) contrast(1.04) brightness(0.99);
   }
-  .read__hero :global(.read__hero-plate) {
-    aspect-ratio: 3 / 2;
-    max-height: 26rem;
-  }
-  .read__caption {
-    margin-top: 0.7rem;
-    font-size: var(--step--1);
-    color: var(--ink-faint);
+  .bp__caption { margin-top: 0.5rem; font-size: var(--step--1); font-style: italic; color: var(--ink-faint); }
+
+  .bp__title { font-size: var(--step-4); line-height: 1.02; margin: 0.5rem 0 0.6rem; }
+  .bp__deck {
+    font-family: var(--font-display);
+    font-weight: 400;
     font-style: italic;
-    text-align: center;
-  }
-
-  /* --- Body: one flowing column, comfortable long-read type ------------ */
-  .read__body {
-    margin-top: clamp(2.4rem, 5vw, 3.4rem);
-    font-size: clamp(1.1rem, 1.04rem + 0.3vw, 1.24rem);
-    line-height: 1.75;
-  }
-  .read__body :global(h2) { margin-top: 2em; }
-
-  /* Pull-quotes: let blockquotes breathe slightly past the text edge for a
-     premium editorial feel — still anchored, never a separate column. */
-  .read__body :global(blockquote) {
+    font-size: var(--step-2);
+    line-height: 1.26;
+    color: var(--ink-soft);
     max-width: none;
-    margin-inline: clamp(-1.4rem, -2.5vw, -2.6rem);
-    padding: 0.6em 0 0.6em 1.6em;
-    border-left-width: 3px;
   }
-  @media (max-width: 40rem) {
-    .read__body :global(blockquote) { margin-inline: 0; }
+  .bp__byline { margin-top: 1rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.45rem; font-size: var(--step--1); color: var(--ink-faint); }
+  .bp__byline strong { color: var(--ink); }
+  .bp__byline time { color: var(--ink-faint); }
+  .bp__sep { color: var(--paper-edge); }
+  .bp__sep--views { display: none; }
+  .bp__byline:has(.views:not([hidden])) .bp__sep--views { display: inline; }
+  .bp__byline :global(.views) { color: var(--ink-faint); }
+  .bp__updated { margin-top: 0.35rem; font-style: italic; font-size: var(--step--1); color: var(--ink-faint); }
+
+  /* --- Broadsheet body: multi-column newspaper text -------------------- */
+  .bp__body { max-width: none; font-size: clamp(1.04rem, 1rem + 0.25vw, 1.16rem); line-height: 1.7; }
+  .bp__body :global(:where(p, ul, ol, blockquote, h2, h3, h4, figure, img)) { max-width: none; }
+
+  @media (min-width: 52rem) {
+    .bp__body {
+      column-count: 2;
+      column-gap: clamp(2rem, 3.5vw, 3.4rem);
+      column-rule: 1px solid var(--paper-edge);
+      text-align: justify;
+      hyphens: auto;
+    }
+    /* Section headings span both columns, like a newspaper subhead. */
+    .bp__body :global(h2) {
+      column-span: all;
+      text-align: left;
+      margin-top: 1.4em;
+      padding-top: 0.6rem;
+      border-top: 1px solid var(--paper-edge);
+    }
+    .bp__body :global(blockquote),
+    .bp__body :global(h3),
+    .bp__body :global(figure) { break-inside: avoid; }
   }
-  .read__body :global(figure),
-  .read__body :global(img) { max-width: none; }
+  .bp__body :global(h2:first-child),
+  .bp__body :global(p:first-child) { margin-top: 0; padding-top: 0; border-top: 0; }
 
   /* --- Footer ---------------------------------------------------------- */
-  .read :global(.read__rule--end) { margin-top: clamp(2.6rem, 5vw, 3.6rem); }
-  .read__foot { display: block; }
-  .read__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.45rem;
-    margin-bottom: clamp(2.2rem, 5vw, 3rem);
-  }
-  .read__news { margin-bottom: clamp(2rem, 4vw, 2.6rem); }
-  .read__back a {
-    font-family: var(--font-display);
-    font-weight: 600;
-    text-decoration: none;
-    color: var(--ink-soft);
-  }
-  .read__back a:hover { color: var(--oxblood); }
+  .bp :global(.bp__rule) { margin-block: clamp(2rem, 4vw, 2.8rem); }
+  .bp__foot { margin-top: 0.5rem; }
+  .bp__tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.8rem; }
+  .bp__news { max-width: 48rem; margin-bottom: 1.8rem; }
+  .bp__back a { font-family: var(--font-display); font-weight: 700; text-decoration: none; color: var(--ink-soft); }
+  .bp__back a:hover { color: var(--oxblood); }
 </style>
