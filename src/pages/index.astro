@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
-import Newsletter from '../components/Newsletter.astro';
+import TrustedSources from '../components/TrustedSources.astro';
 import { withBase, formatDate } from '../lib/utils';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
@@ -79,7 +79,7 @@ const today = formatDate(new Date(), { weekday: 'long', year: 'numeric', month: 
       <p class="front__all"><a class="btn btn--ghost" href={withBase('/blog')}>Browse all dispatches →</a></p>
     </section>
 
-    <section class="front__news"><Newsletter /></section>
+    <TrustedSources />
   </div>
 </BaseLayout>
 

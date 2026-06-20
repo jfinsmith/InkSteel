@@ -1,0 +1,139 @@
+---
+import { withBase } from '../lib/utils';
+
+const sources = [
+  {
+    name: 'Ground News',
+    icon: 'ground-news.png',
+    url: 'https://ground.news',
+    why: "Lays every story side by side across the spectrum, with bias and ownership ratings and “blindspot” alerts — so you can see who’s spinning, and which way.",
+  },
+  {
+    name: 'Straight Arrow News',
+    icon: 'straight-arrow-news.png',
+    url: 'https://san.com',
+    why: 'Reports straight down the middle and labels where each outlet leans, then leaves the conclusions to you.',
+  },
+  {
+    name: 'PolitiFact',
+    icon: 'politifact.png',
+    url: 'https://www.politifact.com',
+    why: 'Pulitzer-winning, nonpartisan fact-checking from the Poynter Institute — every rating shows its receipts.',
+  },
+  {
+    name: 'The Associated Press',
+    icon: 'ap.png',
+    url: 'https://apnews.com',
+    why: 'A nonprofit news cooperative and the wire other newsrooms quote: verified, plain, just the facts.',
+  },
+  {
+    name: 'Reuters',
+    icon: 'reuters.png',
+    url: 'https://www.reuters.com',
+    why: 'A global wire bound by the Trust Principles of independence, integrity, and freedom from bias.',
+  },
+  {
+    name: 'NPR',
+    icon: 'npr.png',
+    url: 'https://www.npr.org',
+    why: 'Nonprofit public media with rigorous editorial standards — and corrections made out in the open.',
+  },
+];
+---
+
+<section class="sources" aria-labelledby="sources-title">
+  <p class="sources__kicker">Don't Take Our Word for It</p>
+  <h2 class="sources__title" id="sources-title">Trust, but Verify</h2>
+  <p class="sources__lead">
+    The opinions here are ours. The facts come from places that earn trust the hard way &mdash; by
+    showing their work, owning their mistakes, and telling you where they lean. Start here.
+  </p>
+
+  <ul class="sources__grid">
+    {sources.map((s) => (
+      <li class="source">
+        <a class="source__link" href={s.url} target="_blank" rel="noopener noreferrer nofollow">
+          <span class="source__logo">
+            <img src={withBase('/images/sources/' + s.icon)} alt={s.name + ' logo'} width="48" height="48" loading="lazy" decoding="async" />
+          </span>
+          <span class="source__name">{s.name}<span class="source__go" aria-hidden="true">↗</span></span>
+        </a>
+        <p class="source__why">{s.why}</p>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .sources { margin-top: clamp(2rem, 5vw, 3.5rem); }
+  .sources__kicker {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: var(--step--1);
+    color: var(--oxblood);
+    text-align: center;
+    margin: 0;
+  }
+  .sources__title {
+    text-align: center;
+    font-size: var(--step-2);
+    margin: 0.2rem 0 0.6rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.6rem;
+  }
+  .sources__lead {
+    max-width: 46rem;
+    margin: 0 auto 1.8rem;
+    text-align: center;
+    color: var(--ink-soft);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-0);
+  }
+
+  .sources__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: clamp(1rem, 2.5vw, 1.6rem);
+  }
+  .source {
+    background: var(--paper-deep);
+    border: 1px solid var(--paper-edge);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: clamp(1rem, 2.2vw, 1.4rem);
+  }
+  .source__link { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+  .source__logo {
+    flex: 0 0 auto;
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    border: 1px solid var(--paper-edge);
+    border-radius: 10px;
+  }
+  .source__logo img { width: 2rem; height: 2rem; object-fit: contain; }
+  .source__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-0);
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .source__go { color: var(--oxblood); margin-left: 0.3em; font-weight: 700; }
+  .source__link:hover .source__name { color: var(--oxblood); }
+  .source__why {
+    margin: 0.8rem 0 0;
+    font-size: var(--step--1);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: none;
+  }
+</style>
