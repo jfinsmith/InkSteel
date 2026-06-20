@@ -18,16 +18,23 @@ const isActive = (href: string) => {
 
 <header class="mast">
   <div class="mast__top wrap">
-    <a class="mast__home" href={withBase('/')} aria-label="The Ink &amp; Steel — home">
+    <a class="mast__lock" href={withBase('/')} aria-label="The Ink &amp; Steel — home">
       <img
         class="mast__logo"
-        src={withBase('/images/brand/logo-full.png')}
-        alt="The Ink & Steel — Political Journal Focused on Common Sense"
+        src={withBase('/images/brand/logo-journal.png')}
+        alt="The Ink & Steel Journal — crossed fountain pen and dagger emblem"
         width="900"
         height="491"
         loading="eager"
         decoding="async"
       />
+      <span class="mast__rule" aria-hidden="true"></span>
+      <span class="mast__center">
+        <span class="mast__word">THE INK <span class="mast__amp">&amp;</span> STEEL</span>
+        <span class="mast__tag">
+          Uncommon Sense for the Common Man <span class="mast__dot">·</span> Sharper Than a Tack
+        </span>
+      </span>
     </a>
   </div>
 
@@ -52,25 +59,76 @@ const isActive = (href: string) => {
 </header>
 
 <style>
-  /* Light parchment banner matching the logo's own background (#ede6d6) so the
-     uncropped logo PNG sits seamlessly, no visible box. */
   .mast {
-    background-color: #ede6d6;
-    background-image: var(--paper-grain);
+    background-color: var(--navy);
+    background-image: var(--leather-grain),
+      radial-gradient(140% 120% at 50% 0%, var(--navy-soft), var(--navy) 60%, var(--navy-deep));
     border-bottom: 3px solid var(--gold-deep);
   }
-  .mast__top {
+
+  /* Lockup: logo | gold hairline | wordmark + tagline */
+  .mast__top { padding-block: clamp(0.6rem, 2vw, 1.2rem); }
+  .mast__lock {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    padding-block: clamp(0.5rem, 1.6vw, 1rem);
+    justify-content: flex-start;
+    gap: clamp(0.6rem, 2vw, 1.4rem);
+    text-decoration: none;
+    width: fit-content;
+    max-width: 100%;
   }
-  .mast__home { display: inline-block; line-height: 0; }
   .mast__logo {
-    height: clamp(5rem, 7vw + 2rem, 10.5rem);
+    height: clamp(4rem, 5vw + 1.8rem, 7rem);
     width: auto;
-    display: block;
+    flex: 0 0 auto;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.4));
   }
+  .mast__rule {
+    flex: 0 0 auto;
+    width: 2px;
+    align-self: stretch;
+    max-height: clamp(3rem, 6vw, 5rem);
+    margin-block: auto;
+    opacity: 0.7;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      var(--gold) 18%,
+      var(--gold-light) 50%,
+      var(--gold) 82%,
+      transparent
+    );
+  }
+
+  .mast__center { display: flex; flex-direction: column; justify-content: center; text-align: left; }
+  .mast__word {
+    display: inline-block;
+    max-width: 100%;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.4rem, 0.6rem + 4vw, 4.4rem);
+    line-height: 1;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+    background: linear-gradient(180deg, #f3eede 0%, #e6e0d0 34%, #c4ccd6 66%, #9aa6b4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 0.6px rgba(20, 28, 48, 0.35);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 2px rgba(0, 0, 0, 0.55);
+  }
+  .mast__amp { font-style: italic; padding: 0 0.06em; -webkit-text-stroke: 0.6px rgba(20, 28, 48, 0.35); }
+  .mast__tag {
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(0.62rem, 0.5rem + 0.7vw, 0.92rem);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #b9c2cd;
+  }
+  .mast__dot { color: var(--gold); padding: 0 0.15em; }
 
   /* --- Nav bar --- */
   .mast__nav {
@@ -108,7 +166,10 @@ const isActive = (href: string) => {
   .mast__toggle span { width: 26px; height: 2px; background: var(--gold-light); display: block; }
 
   @media (max-width: 760px) {
-    .mast__top { justify-content: center; }
+    .mast__top { display: flex; justify-content: center; }
+    .mast__lock { flex-direction: column; align-items: center; gap: clamp(0.4rem, 2vw, 0.8rem); width: 100%; max-width: 100%; margin-inline: auto; }
+    .mast__rule { display: none; }
+    .mast__center { text-align: center; align-items: center; max-width: 100%; }
     .mast__toggle { display: flex; }
     .mast__links { max-height: 0; overflow: hidden; flex-direction: column; align-items: center; padding-block: 0; transition: max-height 0.25s ease, padding-block 0.25s ease; }
     .mast__links.is-open { max-height: 60vh; padding-block: 0.6rem 1rem; }
