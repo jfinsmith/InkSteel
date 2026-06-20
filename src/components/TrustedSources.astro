@@ -42,8 +42,8 @@ const sources = [
 ---
 
 <section class="sources" aria-labelledby="sources-title">
-  <p class="sources__kicker">Don't Take Our Word for It</p>
   <h2 class="sources__title" id="sources-title">Trust, but Verify</h2>
+  <p class="sources__kicker">Don't Take Our Word for It</p>
   <p class="sources__lead">
     The opinions here are ours. The facts come from places that earn trust the hard way &mdash; by
     showing their work, owning their mistakes, and telling you where they lean. Start here.
@@ -66,6 +66,11 @@ const sources = [
 
 <style>
   .sources { margin-top: clamp(2rem, 5vw, 3.5rem); }
+  .sources__title {
+    text-align: center;
+    font-size: var(--step-2);
+    margin: 0 0 0.3rem;
+  }
   .sources__kicker {
     font-family: var(--font-display);
     font-weight: 700;
@@ -74,14 +79,7 @@ const sources = [
     font-size: var(--step--1);
     color: var(--oxblood);
     text-align: center;
-    margin: 0;
-  }
-  .sources__title {
-    text-align: center;
-    font-size: var(--step-2);
-    margin: 0.2rem 0 0.6rem;
-    border-bottom: 2px solid var(--ink);
-    padding-bottom: 0.6rem;
+    margin: 0 0 1rem;
   }
   .sources__lead {
     max-width: 46rem;
