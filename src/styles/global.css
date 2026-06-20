@@ -140,6 +140,8 @@ pre code { background: none; padding: 0; }
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
+  /* Breathing room so content never butts against the parchment's bottom edge. */
+  padding-bottom: clamp(3rem, 6vw, 5rem);
 }
 /* gilded top edge on the sheet */
 .sheet::before {
