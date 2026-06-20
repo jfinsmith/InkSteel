@@ -13,7 +13,9 @@ import { withBase } from '../lib/utils';
       <header class="longread__head">
         <p class="kicker">About the Author</p>
         <h1 class="about__title">The world is a dumpster fire, and I am pretending to be a firefighter.</h1>
-        <p class="longread__sub">A forty-year-old Floridian. A career cop, now command staff. Raised Republican, still common-sense. Beholden to no party — only to the obvious thing said out loud.</p>
+        <p class="longread__sub">A forty-year-old Floridian. A career cop, lately in a leadership role. Raised Republican, still common-sense. Beholden to no party — only to the obvious thing said out loud.</p>
+        {/* Author portrait will go here once Justin sends one:
+            <img class="about__portrait" src={withBase('/images/brand/justin.jpg')} alt="Justin Smith" /> */}
       </header>
 
       <Divider />
@@ -26,7 +28,7 @@ import { withBase } from '../lib/utils';
 
       <p>I cast my first Democratic ballot in college. Nobody converted me — I just kept getting educated and kept getting out into the world, and the two have a way of burning off the fog. A whole lot of what I'd been handed growing up simply didn't survive contact with reality.</p>
 
-      <p>I took the scenic route to get here. I've played in a rock band. I've sold wine. I rented out movies at a Blockbuster, back when that sentence still made sense. I taught for a stretch. And then I went into law enforcement, and built a career I'm genuinely proud of — working my way up, these days, to a command-staff position.</p>
+      <p>I took the scenic route to get here. I've played in a rock band. I've sold wine. I rented out movies at a Blockbuster, back when that sentence still made sense. I taught for a stretch. And then I went into law enforcement, where I've spent most of my working life and, these days, found my way into a leadership role — one I'd rather try to be worthy of than brag about.</p>
 
       <p>That last part comes with a particular kind of loneliness. Policing is not exactly wall-to-wall with people who see the world the way I do; most of the room sits on the other side of the aisle from me. So I've made it my quiet job to be the guy who says the common-sense thing out loud anyway. I don't go hunting for the political fight — but I have never once turned one down.</p>
 
@@ -42,6 +44,17 @@ import { withBase } from '../lib/utils';
 
       <Divider />
 
+      <aside class="site-box" aria-label="What this site is">
+        <h2 class="site-box__title">What The Ink &amp; Steel Is</h2>
+        <p class="site-box__lead">An independent political journal — common sense, said out loud, for people who are tired of being talked down to.</p>
+        <ul class="site-box__list">
+          <li><strong>The beat.</strong> American politics in the second Trump era: the absurd, the alarming, and the things everyone sees but few will say.</li>
+          <li><strong>The standard.</strong> The opinions run hot, but the facts stay cold and linked — every claim points to a real source.</li>
+          <li><strong>The angle.</strong> Nobody's mouthpiece. Conservative where it earns it, progressive where it matters, allergic to nonsense everywhere.</li>
+          <li><strong>The point.</strong> To say the obvious thing out loud — and to keep a record, so nobody can pretend later they didn't know.</li>
+        </ul>
+      </aside>
+
       <p class="about-cta">
         <a href={withBase('/blog')} class="btn">Read the dispatches</a>
         <a href={withBase('/the-record')} class="btn btn--ghost">See The Record</a>
@@ -53,4 +66,19 @@ import { withBase } from '../lib/utils';
 <style>
   .about__title { font-size: var(--step-4); line-height: 1.06; }
   .about-cta { display: flex; gap: 0.8rem; justify-content: flex-start; flex-wrap: wrap; margin-top: 1.5rem; }
+
+  .site-box {
+    background: var(--paper-deep);
+    border: 1px solid var(--paper-edge);
+    border-left: 6px solid var(--gold);
+    border-radius: var(--radius);
+    padding: clamp(1.2rem, 3vw, 2rem);
+    box-shadow: var(--shadow);
+    margin: 1.5rem 0;
+  }
+  .site-box__title { font-size: var(--step-2); margin: 0 0 0.4rem; color: var(--oxblood); }
+  .site-box__lead { max-width: none; font-family: var(--font-display); font-style: italic; font-size: var(--step-0); color: var(--ink-soft); }
+  .site-box__list { list-style: none; padding-left: 0; max-width: none; margin-top: 1rem; }
+  .site-box__list li { padding: 0.55rem 0; border-top: 1px solid var(--paper-edge); max-width: none; }
+  .site-box__list strong { color: var(--ink); font-family: var(--font-display); letter-spacing: 0.01em; }
 </style>
