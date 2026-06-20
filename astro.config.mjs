@@ -20,6 +20,7 @@ export default defineConfig({
   // Astro emits a static redirect page (meta-refresh + canonical) for GitHub Pages.
   redirects: {
     '/blog/9xhreh82gpq0nla3c0ymucsy5zz5os': '/blog/the-presidents-preferred-painkiller',
+    '/faqs': '/fascism-watch',
   },
   integrations: [
     sitemap({
