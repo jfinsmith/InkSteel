@@ -18,60 +18,24 @@ const isActive = (href: string) => {
 
 <header class="mast">
   <div class="mast__top wrap">
-    <!-- Fountain pen -->
-    <svg class="mast__pen" viewBox="0 0 260 120" aria-hidden="true">
-      <defs>
-        <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#f0d695"/><stop offset="0.45" stop-color="#c79a45"/>
-          <stop offset="0.55" stop-color="#a87f31"/><stop offset="1" stop-color="#e6c578"/>
-        </linearGradient>
-        <linearGradient id="steelGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#d7dde4"/><stop offset="0.5" stop-color="#8b95a3"/>
-          <stop offset="1" stop-color="#5a6472"/>
-        </linearGradient>
-      </defs>
-      <g transform="rotate(-9 130 60)">
-        <rect x="14" y="40" width="120" height="34" rx="17" fill="url(#goldGrad)" stroke="#7c5d24"/>
-        <path d="M30 42 q40 -10 80 0" fill="none" stroke="#f3e0a8" stroke-width="2" opacity="0.7"/>
-        <rect x="128" y="38" width="9" height="38" rx="2" fill="#7c5d24"/>
-        <polygon points="137,42 196,49 196,65 137,72" fill="url(#goldGrad)" stroke="#7c5d24"/>
-        <polygon points="196,49 214,55 214,59 196,65" fill="#7c5d24"/>
-        <polygon points="214,55 250,60 214,65 214,55" fill="url(#steelGrad)" stroke="#46505e" stroke-width="0.8"/>
-        <line x1="216" y1="60" x2="246" y2="60" stroke="#46505e" stroke-width="0.8"/>
-        <circle cx="220" cy="60" r="2" fill="#46505e"/>
-      </g>
-    </svg>
-
-    <div class="mast__center">
-      <a class="mast__word" href={withBase('/')} aria-label="The Ink &amp; Steel — home">
-        THE INK <span class="mast__amp">&amp;</span> STEEL
-      </a>
-      <p class="mast__tag">Uncommon Sense for the Common Man · Sharper Than a Tack</p>
-    </div>
-
-    <!-- Steel I-beam -->
-    <svg class="mast__beam" viewBox="0 0 200 150" aria-hidden="true">
-      <defs>
-        <linearGradient id="beamFront" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#c4ccd6"/><stop offset="0.5" stop-color="#838d9b"/>
-          <stop offset="1" stop-color="#5a6472"/>
-        </linearGradient>
-        <linearGradient id="beamTop" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#e2e7ec"/><stop offset="1" stop-color="#aab2bd"/>
-        </linearGradient>
-      </defs>
-      <g transform="rotate(8 100 75)">
-        <!-- 3D depth -->
-        <polygon points="30,28 58,12 150,12 122,28" fill="url(#beamTop)" stroke="#46505e" stroke-width="0.8"/>
-        <polygon points="122,28 150,12 150,118 122,134" fill="#6c7684" stroke="#46505e" stroke-width="0.8"/>
-        <!-- front I cross-section -->
-        <path d="M22 28 H122 V52 H82 V110 H122 V134 H22 V110 H62 V52 H22 Z"
-              fill="url(#beamFront)" stroke="#46505e" stroke-width="1"/>
-        <line x1="26" y1="32" x2="118" y2="32" stroke="#dfe4ea" stroke-width="1.4" opacity="0.7"/>
-        <circle cx="34" cy="40" r="3" fill="#46505e"/><circle cx="110" cy="40" r="3" fill="#46505e"/>
-        <circle cx="34" cy="122" r="3" fill="#46505e"/><circle cx="110" cy="122" r="3" fill="#46505e"/>
-      </g>
-    </svg>
+    <a class="mast__lock" href={withBase('/')} aria-label="The Ink &amp; Steel — home">
+      <img
+        class="mast__logo"
+        src={withBase('/images/brand/logo-emblem.png')}
+        alt="The Ink & Steel — a crossed fountain pen and dagger within a chain ring"
+        width="555"
+        height="480"
+        loading="eager"
+        decoding="async"
+      />
+      <span class="mast__rule" aria-hidden="true"></span>
+      <span class="mast__center">
+        <span class="mast__word">THE INK <span class="mast__amp">&amp;</span> STEEL</span>
+        <span class="mast__tag">
+          Uncommon Sense for the Common Man <span class="mast__dot">·</span> Sharper Than a Tack
+        </span>
+      </span>
+    </a>
   </div>
 
   <nav class="mast__nav" aria-label="Primary">
@@ -101,44 +65,73 @@ const isActive = (href: string) => {
       radial-gradient(140% 120% at 50% 0%, var(--navy-soft), var(--navy) 60%, var(--navy-deep));
     border-bottom: 3px solid var(--gold-deep);
   }
-  .mast__top {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: clamp(0.5rem, 3vw, 2.5rem);
-    padding-block: clamp(0.8rem, 2.5vw, 1.6rem);
-  }
-  .mast__pen { width: clamp(6rem, 14vw, 12rem); justify-self: end; filter: drop-shadow(0 3px 4px rgba(0,0,0,0.45)); }
-  .mast__beam { width: clamp(5rem, 11vw, 9.5rem); justify-self: start; filter: drop-shadow(0 3px 4px rgba(0,0,0,0.45)); }
 
-  .mast__center { text-align: center; }
+  /* --- Nameplate lockup: emblem | gold rule | wordmark + tagline --- */
+  .mast__top { padding-block: clamp(0.8rem, 2.5vw, 1.6rem); }
+  .mast__lock {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: clamp(0.9rem, 2.5vw, 2rem);
+    text-decoration: none;
+    width: fit-content;
+    max-width: 100%;
+  }
+  .mast__logo {
+    height: clamp(3.75rem, 4vw + 2.4rem, 6.5rem);
+    width: auto;
+    flex: 0 0 auto;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.45));
+  }
+  .mast__rule {
+    flex: 0 0 auto;
+    width: 2px;
+    align-self: stretch;
+    max-height: clamp(3rem, 6vw, 5rem);
+    margin-block: auto;
+    opacity: 0.7;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      var(--gold) 18%,
+      var(--gold-light) 50%,
+      var(--gold) 82%,
+      transparent
+    );
+  }
+
+  .mast__center { display: flex; flex-direction: column; justify-content: center; text-align: left; }
   .mast__word {
     display: inline-block;
+    max-width: 100%;
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(2rem, 1rem + 5.5vw, 5.2rem);
+    font-size: clamp(1.4rem, 0.6rem + 4vw, 4.4rem);
     line-height: 1;
     letter-spacing: 0.01em;
-    text-decoration: none;
-    background: linear-gradient(180deg, #f6e6b4 0%, #d9b25c 38%, #a87f31 52%, #f0d695 100%);
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+    /* cream → steel, echoing the logo's bone title resolving into its steel pen & sword */
+    background: linear-gradient(180deg, #f3eede 0%, #e6e0d0 34%, #c4ccd6 66%, #9aa6b4 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    -webkit-text-stroke: 1px var(--gold-deep);
-    filter: drop-shadow(0 2px 1px rgba(0,0,0,0.55));
-    text-transform: uppercase;
+    -webkit-text-stroke: 0.6px rgba(20, 28, 48, 0.35);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 2px rgba(0, 0, 0, 0.55);
   }
-  .mast__amp { -webkit-text-stroke: 1px var(--gold-deep); font-style: italic; padding: 0 0.06em; }
+  .mast__amp { font-style: italic; padding: 0 0.06em; -webkit-text-stroke: 0.6px rgba(20, 28, 48, 0.35); }
   .mast__tag {
     margin-top: 0.5rem;
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: clamp(0.62rem, 0.5rem + 0.7vw, 0.95rem);
-    letter-spacing: 0.22em;
+    font-size: clamp(0.62rem, 0.5rem + 0.7vw, 0.92rem);
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--gold-light);
+    color: #b9c2cd;
   }
+  .mast__dot { color: var(--gold); padding: 0 0.15em; }
 
+  /* --- Nav bar (unchanged) --- */
   .mast__nav {
     background: var(--navy-deep);
     border-top: 1px solid var(--gold-deep);
@@ -174,8 +167,12 @@ const isActive = (href: string) => {
   .mast__toggle span { width: 26px; height: 2px; background: var(--gold-light); display: block; }
 
   @media (max-width: 760px) {
-    .mast__pen, .mast__beam { display: none; }
-    .mast__top { grid-template-columns: 1fr; }
+    .mast__top { display: flex; justify-content: center; }
+    .mast__lock { flex-direction: column; align-items: center; gap: clamp(0.6rem, 2.5vw, 1rem); width: 100%; max-width: 100%; margin-inline: auto; }
+    .mast__rule { display: none; }
+    .mast__center { text-align: center; align-items: center; max-width: 100%; min-width: 0; }
+    .mast__word { max-width: 100%; font-size: clamp(1.5rem, 7vw, 2.4rem); overflow-wrap: anywhere; }
+    .mast__tag { max-width: 100%; }
     .mast__toggle { display: flex; }
     .mast__links { max-height: 0; overflow: hidden; flex-direction: column; align-items: center; padding-block: 0; transition: max-height 0.25s ease, padding-block 0.25s ease; }
     .mast__links.is-open { max-height: 60vh; padding-block: 0.6rem 1rem; }
