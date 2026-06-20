@@ -9,7 +9,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 const [lead, second, ...restAll] = posts;
-const cards = restAll.slice(0, 6);
+const cards = restAll.slice(0, 8);
 const heroOf = (p: (typeof posts)[number]) =>
   p.data.heroImage && /\.(png|jpe?g|webp|gif|avif)$/i.test(p.data.heroImage)
     ? withBase(p.data.heroImage)
