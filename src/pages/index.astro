@@ -87,11 +87,10 @@ const today = formatDate(new Date(), { weekday: 'long', year: 'numeric', month: 
   .front { padding-block: clamp(1.2rem, 3vw, 2rem) clamp(2.5rem, 6vw, 4rem); }
 
   .front__dateline {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: 1rem;
-    flex-wrap: wrap;
     max-width: none;
     width: 100%;
     padding-bottom: 0.7rem;
@@ -105,7 +104,16 @@ const today = formatDate(new Date(), { weekday: 'long', year: 'numeric', month: 
     letter-spacing: 0.16em;
     color: var(--ink-soft);
   }
-  .front__edition { color: var(--oxblood); font-weight: 700; }
+  .front__dateline > :first-child { justify-self: start; }
+  .front__dateline > :last-child { justify-self: end; text-align: right; }
+  .front__edition { justify-self: center; text-align: center; color: var(--oxblood); font-weight: 700; }
+
+  @media (max-width: 600px) {
+    .front__dateline { grid-template-columns: 1fr; gap: 0.25rem; }
+    .front__dateline > :first-child,
+    .front__dateline > :last-child,
+    .front__edition { justify-self: center; text-align: center; }
+  }
 
   /* Front-page lead: image · headline · sidebar, with newspaper rules */
   .front__lead {
