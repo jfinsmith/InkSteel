@@ -26,6 +26,6 @@ export function withBase(path: string): string {
 export function formatDate(d: Date, opts?: Intl.DateTimeFormatOptions): string {
   return new Intl.DateTimeFormat(
     'en-US',
-    opts ?? { year: 'numeric', month: 'long', day: 'numeric' },
+    opts ?? { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' },
   ).format(d);
 }
