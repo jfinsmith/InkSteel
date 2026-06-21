@@ -7,6 +7,7 @@ pubDate: 2026-06-20
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Healthcare", "Trump Administration"]
 tags: ["Universal Healthcare", "Medicare for All", "Healthcare Costs", "Medical Bankruptcy", "EMTALA", "Iran", "Reflecting Pool", "Immigration", "Donald Trump", "Satire"]
+heroImage: "/images/posts/we-can-afford-everything-but-you.png"
 heroImageAlt: "An ink-wash illustration of an empty hospital bed beside an overflowing vault, the money pouring out toward a distant war and a green puddle."
 heroImagePrompt: "Editorial ink-wash illustration, warm cream paper texture, deep black sumi-e brushstrokes with a single oxblood-red accent. Center: a bare, empty hospital bed with a lone IV stand. Beside it, a heavy bank vault tipped open, a river of coins and bills flowing AWAY from the bed — toward a small distant mushroom-cloud silhouette on one side and a stagnant green reflecting pool on the other. Mood: bitter irony, dignity, neglect. Political-cartoon gravity, no text. 16:9."
 draft: false
