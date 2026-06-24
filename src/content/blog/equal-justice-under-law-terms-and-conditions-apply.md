@@ -7,6 +7,7 @@ pubDate: 2026-06-23
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Rule of Law", "Trump Administration"]
 tags: ["ICE", "Prairieland", "January 6", "Pardons", "Seditious Conspiracy", "Two-Tiered Justice", "Enrique Tarrio", "Immigration", "Fascism", "Donald Trump", "Texas", "Satire"]
+heroImage: "/images/posts/equal-justice-under-law-terms-and-conditions-apply.png"
 heroImageAlt: "An ink-wash illustration of a blindfolded Lady Justice holding wildly unbalanced scales — one pan crushed to the ground under shackled figures, the other floating high with a single pardon scroll."
 heroImagePrompt: "Editorial ink-wash illustration, warm cream paper texture, deep black sumi-e brushstrokes with a single oxblood-red accent. A blindfolded Lady Justice holding scales wildly out of balance: the left pan slammed to the ground, overloaded with small shackled human figures and a fallen protest placard; the right pan flung high and nearly empty, holding only a single rolled pardon tied with a ribbon. Her blindfold lifted slightly on one side, a single eye peeking out. Mood: bitter irony, moral weight, dignity. Political-cartoon gravity, no text. 16:9."
 draft: false
