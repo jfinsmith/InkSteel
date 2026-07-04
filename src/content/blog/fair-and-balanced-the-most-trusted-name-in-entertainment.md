@@ -7,6 +7,7 @@ pubDate: 2026-07-04
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Media", "Trump Administration"]
 tags: ["Fox News", "Dominion", "Smartmatic", "Tucker Carlson", "Sean Hannity", "Rupert Murdoch", "State Media", "Misinformation", "January 6", "Propaganda", "Fascism", "Satire"]
+heroImage: "/images/posts/fair-and-balanced-the-most-trusted-name-in-entertainment.png"
 heroImageAlt: "An ink-wash illustration of a giant vintage television with a fox's grinning face on the screen, its antenna dripping ink into the open heads of a rapt living-room audience."
 heroImagePrompt: "Editorial ink-wash illustration, warm cream paper texture, deep black sumi-e brushstrokes with a single oxblood-red accent. A hulking vintage console television dominating a dim living room, the screen showing a sly grinning fox in a suit and tie at a news desk. From the TV's antenna, thin streams of dark ink arc through the air and pour into the upturned, open silhouetted heads of a family seated on a couch, rapt. A small 'BREAKING' banner shape on the screen rendered as the lone oxblood-red accent. Mood: sinister, satirical, quietly tragic. Political-cartoon gravity, no text other than abstract shapes. 16:9."
 draft: false
