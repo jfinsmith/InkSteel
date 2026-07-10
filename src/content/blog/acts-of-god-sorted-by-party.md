@@ -7,6 +7,7 @@ pubDate: 2026-07-09
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Rule of Law", "Trump Administration"]
 tags: ["FEMA", "Disaster Aid", "Blizzard", "Rhode Island", "New York", "New Jersey", "Massachusetts", "Federalism", "Partisanship", "Fascism", "Donald Trump", "Satire"]
+heroImage: "/images/posts/acts-of-god-sorted-by-party.png"
 heroImageAlt: "An ink-wash illustration of a snow-buried small town, a single federal aid truck at a fork in the road turning away from it toward a sunny, undamaged town flying victory flags."
 heroImagePrompt: "Editorial ink-wash illustration, warm cream paper texture, deep black sumi-e brushstrokes with a single oxblood-red accent. A small New England town buried under heavy snowdrifts — collapsed roofs, a snapped power line, tiny huddled figures shoveling. In the foreground a lone federal aid truck sits at a fork in the road, turning AWAY from the buried town, heading instead toward a distant, untouched sunny town on a hill flying celebratory pennants. The truck's tiny brake light the lone oxblood-red accent. Mood: cold abandonment, quiet injustice. Political-cartoon gravity, no text. 16:9."
 draft: false
