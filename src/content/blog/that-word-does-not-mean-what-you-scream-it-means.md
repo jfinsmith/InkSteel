@@ -7,6 +7,7 @@ pubDate: 2026-08-14
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Media", "Civics"]
 tags: ["Socialism", "Communism", "Democratic Socialism", "DSA", "Zohran Mamdani", "Bernie Sanders", "Denmark", "Nordic Model", "Fox News", "Red Scare", "Medicare", "Social Security", "Satire"]
+heroImage: "/images/posts/that-word-does-not-mean-what-you-scream-it-means.jpg"
 heroImageAlt: "An ink-wash illustration of a red-faced TV pundit shouting through a megaphone labeled with a hammer and sickle, while behind him an open dictionary the size of a billboard shows three clearly separated definitions he isn't reading."
 heroImagePrompt: "Editorial ink-wash illustration, warm cream paper texture, deep black sumi-e brushstrokes with a single oxblood-red accent. A sweating, red-faced television pundit in suit and flag pin, mid-scream into a huge megaphone; from the megaphone erupts a chaotic cloud of hammer-and-sickle scribbles rendered in the lone oxblood-red accent. Behind him, ignored, stands an enormous open dictionary on a lectern, its two visible pages calmly divided into three neat labeled columns of tidy text. The pundit faces away from the book. Mood: absurd, satirical, exasperated. Political-cartoon gravity, no legible words. 16:9."
 draft: false
