@@ -5,7 +5,7 @@
 // Usage:
 //   chrome --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=/tmp/cdpprof &
 //   node scripts/cdp-shot.mjs <url> <outfile> [width] [height] [dsf] [port] [scroll]
-//     scroll: pass "bottom" to scroll to the page bottom before capturing.
+//     scroll: "top" (default), "bottom", or any CSS selector to scroll into view (e.g. "table").
 import net from 'node:net';
 import crypto from 'node:crypto';
 import http from 'node:http';
@@ -103,6 +103,14 @@ await Promise.race([loaded, sleep(6000)]);
 await sleep(900); // fonts/images
 if (SCROLL === 'bottom') {
   await cdp.send('Runtime.evaluate', { expression: 'window.scrollTo(0, document.body.scrollHeight)' });
+  await sleep(500);
+} else if (SCROLL !== 'top') {
+  // Any other value is treated as a CSS selector to scroll into view (e.g. "table").
+  // Scroll twice: late font/image layout shifts move the target after the first scroll.
+  const expr = `document.querySelector(${JSON.stringify(SCROLL)})?.scrollIntoView({ block: 'start' })`;
+  await cdp.send('Runtime.evaluate', { expression: expr });
+  await sleep(1200);
+  await cdp.send('Runtime.evaluate', { expression: expr });
   await sleep(500);
 }
 const { data } = await cdp.send('Page.captureScreenshot', { format: 'png' });

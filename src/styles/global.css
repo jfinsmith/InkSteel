@@ -165,6 +165,46 @@ pre code { background: none; padding: 0; }
 .prose ul, .prose ol { max-width: var(--measure); padding-left: 1.4em; }
 .prose li + li { margin-top: 0.4em; }
 
+/* Tables — newspaper "box score" style: ink rules, no zebra, scrolls on narrow screens */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 1.6em;
+  font-size: 0.92em;
+  line-height: 1.45;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.prose thead th {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.78em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  text-align: left;
+  padding: 0.7em 0.9em 0.55em;
+  border-bottom: 1px solid var(--ink);
+}
+.prose td {
+  padding: 0.6em 0.9em;
+  vertical-align: top;
+  border-top: 1px solid var(--paper-edge);
+}
+.prose tbody tr:first-child td { border-top: 0; }
+.prose td:first-child, .prose th:first-child { padding-left: 0; white-space: nowrap; }
+.prose td:last-child, .prose th:last-child { padding-right: 0; }
+/* Phones: each row becomes a stacked entry — name first, the rest beneath it */
+@media (max-width: 640px) {
+  .prose table, .prose tbody, .prose tr, .prose td { display: block; width: 100%; }
+  .prose thead { display: none; }
+  .prose tr { padding: 0.7em 0; border-top: 1px solid var(--paper-edge); }
+  .prose tbody tr:first-child { border-top: 0; }
+  .prose td { padding: 0; border-top: 0; white-space: normal; }
+  .prose td:first-child { font-size: 1.05em; }
+  .prose td + td { color: var(--ink-soft); margin-top: 0.15em; }
+}
+
 main { flex: 1 0 auto; }
 
 /* --- Left-aligned page header (listing pages) ---------------------------- */
