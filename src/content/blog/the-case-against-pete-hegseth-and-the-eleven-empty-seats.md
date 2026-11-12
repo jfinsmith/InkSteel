@@ -7,6 +7,7 @@ pubDate: 2026-11-12
 author: "Justin Smith"
 categories: ["Political Commentary", "Opinion", "US Politics", "Rule of Law", "Trump Administration"]
 tags: ["Pete Hegseth", "Impeachment", "Thomas Massie", "Boat Strikes", "War Crimes", "Signalgate", "War Powers", "Iran", "Venezuela", "Mark Kelly", "House Democrats", "Congress", "Satire"]
+heroImage: "/images/posts/the-case-against-pete-hegseth-and-the-eleven-empty-seats.jpg"
 heroImageAlt: "An ink-wash illustration of a row of empty congressional chairs in a vast chamber, while beyond the tall windows a man in a suit strides away untouched, leaving bootprints of red ink."
 heroImagePrompt: "Editorial ink-wash illustration, warm cream paper texture, deep black sumi-e brushstrokes with a single oxblood-red accent. Inside a grand neoclassical legislative chamber, a single row of eleven empty leather chairs sits in sharp focus among a crowded, shadowy assembly of seated silhouettes. Through a tall arched window behind them, a lone figure in a dark suit walks away down marble steps, unhurried, leaving a faint trail of bootprints rendered in the lone oxblood-red accent. A gavel rests untouched on the rostrum. Mood: quiet failure, missed opportunity, bitter irony. Political-cartoon gravity, no text. 16:9."
 draft: false
